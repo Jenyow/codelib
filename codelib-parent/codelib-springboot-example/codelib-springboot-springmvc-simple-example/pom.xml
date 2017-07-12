@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.codelib</groupId>
-		<artifactId>code-springboot-example</artifactId>
+		<artifactId>codelib-springboot-example</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>codelib-springboot-springmvc-simple-example</artifactId>
