@@ -5,7 +5,7 @@
     <artifactId>codelib-springboot-samples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>codelib-springboot-springmvc-jsp-sample</artifactId>
+  <artifactId>codelib-springboot-sample-springmvc-jsp</artifactId>
   <packaging>war</packaging>
   
   <properties>

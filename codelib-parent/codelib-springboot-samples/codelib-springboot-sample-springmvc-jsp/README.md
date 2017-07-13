@@ -8,14 +8,14 @@
 引入标签：<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 * 格式化标签：用来格式化并输出文本、日期、时间、数字。<br/>
 引入标签：<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-* SQL 标签：提供了与关系型数据库（Oracle，MySQL，SQL Server等等）进行交互的标签。<br/>
-引入标签：<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+* JSTL 函数：JSTL包含一系列标准函数，大部分是通用的字符串处理函数。<br/>
+引入标签：<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 * XML 标签：提供了创建和操作XML文档的标签。<br/>
 jar：XercesImpl.jar、xalan.jar<br/>
 引入标签：<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-* JSTL 函数：JSTL包含一系列标准函数，大部分是通用的字符串处理函数。<br/>
-引入标签：<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+* SQL 标签：提供了与关系型数据库（Oracle，MySQL，SQL Server等等）进行交互的标签。<br/>
+引入标签：<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 
 ## 参考
 * Spring Boot 官方例子：https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-web-jsp
-* JSP教程：http://www.runoob.com/jsp/jsp-jstl.html
+* JSP JSTL教程：http://www.runoob.com/jsp/jsp-jstl.html

@@ -9,7 +9,7 @@
 	<artifactId>codelib-springboot-samples</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>codelib-springboot-springmvc-simple-sample</module>
-		<module>codelib-springboot-springmvc-jsp-sample</module>
+		<module>codelib-springboot-sample-springmvc-integration</module>
+		<module>codelib-springboot-sample-springmvc-jsp</module>
 	</modules>
 </project>
