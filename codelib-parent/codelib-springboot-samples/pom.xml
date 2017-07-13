@@ -6,9 +6,10 @@
 		<artifactId>codelib-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>codelib-springboot-example</artifactId>
+	<artifactId>codelib-springboot-samples</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>codelib-springboot-springmvc-simple-example</module>
+		<module>codelib-springboot-springmvc-simple-sample</module>
+		<module>codelib-springboot-springmvc-jsp-sample</module>
 	</modules>
 </project>
