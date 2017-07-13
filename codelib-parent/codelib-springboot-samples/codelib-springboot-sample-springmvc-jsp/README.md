@@ -4,16 +4,16 @@
 ## JSTL(JSP 标准标签库)
 需要jar：standard.jar、jstl.jar
 根据JSTL标签所提供的功能，可以将其分为5个类别。
-* 核心标签：核心标签是最常用的JSTL标签。
+* 核心标签：核心标签是最常用的JSTL标签。<br/>
   引入标签：<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-* 格式化标签：用来格式化并输出文本、日期、时间、数字。
+* 格式化标签：用来格式化并输出文本、日期、时间、数字。<br/>
   引入标签：<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-* SQL 标签：提供了与关系型数据库（Oracle，MySQL，SQL Server等等）进行交互的标签。
+* SQL 标签：提供了与关系型数据库（Oracle，MySQL，SQL Server等等）进行交互的标签。<br/>
   引入标签：<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-* XML 标签：提供了创建和操作XML文档的标签。
-  jar：XercesImpl.jar、xalan.jar
+* XML 标签：提供了创建和操作XML文档的标签。<br/>
+  jar：XercesImpl.jar、xalan.jar<br/>
   引入标签：<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-* JSTL 函数：JSTL包含一系列标准函数，大部分是通用的字符串处理函数。
+* JSTL 函数：JSTL包含一系列标准函数，大部分是通用的字符串处理函数。<br/>
   引入标签：<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 ## 参考
