@@ -6,7 +6,7 @@
 		<artifactId>codelib-springboot-samples</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>codelib-springboot-sample-springmvc-integration</artifactId>
+	<artifactId>codelib-springboot-sample-springmvc-thymeleaf</artifactId>
 	<packaging>war</packaging>
 
 	<dependencies>
@@ -15,6 +15,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!-- Tomcat -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
+
+
 
 </project>
