@@ -1,0 +1,19 @@
+spring:
+    profiles:
+      # 申明使用哪个配置文件(dev,prod,test)
+      # application.properties（默认读取）、
+      # application-dev.properties（开发环境）、
+      # application-prod.properties（生成环境）、
+      # application-test.properties（测试环境） 
+      active: dev
+
+server:
+  port: 8080
+  context-path: /codelib-springboot-sample-springmvc-swagger
+
+springfox:
+  documentation:
+    # 这个path就是json的访问request mapping.可以自定义，防止与自身代码冲突。
+    swagger.v2.path: /api-docs
+    # 测试时需要设置IP和端口
+    swagger.v2.host: localhost:8080

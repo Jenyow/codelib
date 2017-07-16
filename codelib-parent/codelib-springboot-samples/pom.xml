@@ -12,5 +12,6 @@
 		<module>codelib-springboot-sample-springmvc-integration</module>
 		<module>codelib-springboot-sample-springmvc-jsp</module>
 		<module>codelib-springboot-sample-springmvc-thymeleaf</module>
+		<module>codelib-springboot-sample-springmvc-swagger</module>
 	</modules>
 </project>
