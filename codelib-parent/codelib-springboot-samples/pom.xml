@@ -13,5 +13,7 @@
 		<module>codelib-springboot-sample-springmvc-jsp</module>
 		<module>codelib-springboot-sample-springmvc-thymeleaf</module>
 		<module>codelib-springboot-sample-springmvc-swagger</module>
+		<module>codelib-springboot-sample-springsecurity</module>
+		<module>codelib-springboot-sample-mybatis</module>
 	</modules>
 </project>
