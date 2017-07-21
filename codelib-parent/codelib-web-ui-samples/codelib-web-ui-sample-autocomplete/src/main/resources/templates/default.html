@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>jQuery Autocomplete</title>
+<link rel="stylesheet" href="plugin/jquery-ui-1.12.1/jquery-ui.css" />
+</head>
+<body>
+	<div class="ui-widget">
+		<label for="tags">Tags: </label> 
+		<input id="tags" />
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="plugin/jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script>
+		$(function() {
+			var availableTags = [ "ActionScript", "AppleScript", "Asp",
+					"BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion",
+					"Erlang", "Fortran", "Groovy", "Haskell", "Java",
+					"JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby",
+					"Scala", "Scheme", "小赞", "小药" ];
+			$("#tags").autocomplete({
+				source : availableTags
+			});
+		});
+	</script>
+
+</body>
+
+</html>

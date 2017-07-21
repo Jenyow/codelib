@@ -7,6 +7,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>codelib-springboot-samples</module>
+		<module>codelib-web-ui-samples</module>
 	</modules>
 
 	<properties>
