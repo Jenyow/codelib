@@ -6,6 +6,7 @@ druid 的配置及默认值 可以查看 DruidDataSource 类和 DruidAbstractDat
 druid 支持分库分表和集群<br>
 PageUtils是基于Druid SQL Parser实现的分页SQL自动生成类。目前支持MySql、Oracle、DB2、SQL Server四种数据库类型。说明：https://github.com/alibaba/druid/wiki/Use_PageUtils<br>
 通常你需要配置：url、username、password、maxActive、maxWait、keepAlive、poolPreparedStatements、maxPoolPreparedStatementPerConnectionSize<br>
+druid 监控地址：http://localhost:8080/codelib-springboot-sample-mybatis/druid/login.html
 
 ## SQL语言共分为四大类
 * 数据查询语言DQL，
@@ -14,7 +15,7 @@ PageUtils是基于Druid SQL Parser实现的分页SQL自动生成类。目前支�
 * 数据控制语言DCL。
 
 ## mybatis
-通过Maven运行 MyBatis Generator 命令：mybatis-generator:generate
+通过Maven运行 MyBatis Generator 命令：**mybatis-generator:generate**
 
 ## 参考
 * druid 教程：https://github.com/alibaba/druid/wiki
