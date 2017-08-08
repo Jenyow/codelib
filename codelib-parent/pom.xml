@@ -8,6 +8,7 @@
 	<modules>
 		<module>codelib-springboot-samples</module>
 		<module>codelib-web-ui-samples</module>
+		<module>codelib-springsecurity-samples</module>
 	</modules>
 
 	<properties>

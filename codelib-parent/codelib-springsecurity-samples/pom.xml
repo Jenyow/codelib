@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.codelib</groupId>
+    <artifactId>codelib-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>codelib-springsecurity-samples</artifactId>
+  <packaging>pom</packaging>
+  
+  <modules>
+    <module>codelib-springboot-sample-springsecurity</module>
+    <module>codelib-springboot-sample-springsecurity-oauth2</module>
+  </modules>
+  
+</project>
