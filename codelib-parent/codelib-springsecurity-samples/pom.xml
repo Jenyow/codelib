@@ -9,8 +9,8 @@
   <packaging>pom</packaging>
   
   <modules>
-    <module>codelib-springboot-sample-springsecurity</module>
-    <module>codelib-springboot-sample-springsecurity-oauth2</module>
+    <module>codelib-springsecurity-sample-web</module>
+    <module>codelib-springsecurity-sample-oauth2</module>
   </modules>
   
 </project>

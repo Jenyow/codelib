@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" th:href="@{../favicon.ico}" href="../favicon.ico" />
+
+    <title>注册</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /> -->
+    <link th:href="@{plugins/bootstrap/css/bootstrap.min.css}" href="../static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link th:href="@{css/ie10-viewport-bug-workaround.css}" href="../static/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/signin.css}" href="../static/css/signin.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script th:src="@{js/ie-emulation-modes-warning.js}" src="../static/js/ie-emulation-modes-warning.js" type="text/javascript"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" th:action="@{/register}" action="#" method="post">
+        <h2 class="form-signin-heading">注册</h2>
+        <label for="inputUsername" class="sr-only">用户名</label>
+        <input type="text" id="inputUsername" name="username" class="form-control" placeholder="输入用户名" required="required" autofocus="autofocus" />
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="输入密码" required="required" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+		<div class="checkbox">
+		  <label class="register">
+			<a th:href="@{/login}" href="login.html" role="button"> 返回登录 >> </a>
+		  </label>
+        </div>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script th:src="@{js/ie10-viewport-bug-workaround.js}" src="../static/js/ie10-viewport-bug-workaround.js" type="text/javascript"></script>
+  </body>
+</html>
