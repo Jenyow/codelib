@@ -39,7 +39,7 @@ public class MyBatisConfig {
 		sqlSessionFactoryBean.setPlugins(plugins);
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sqlSessionFactoryBean
-				.setMapperLocations(resolver.getResources("classpath:com/codelib/springboot/sample/mybatis/mapper/*.xml"));
+				.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
 		return sqlSessionFactoryBean.getObject();
 	}
 }

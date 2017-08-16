@@ -24,4 +24,6 @@ druid 监控地址：http://localhost:8080/codelib-springboot-sample-mybatis/dru
 * spring boot properties类的教程：http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-typesafe-configuration-properties
 * spring boot druid整合例子：http://www.jianshu.com/p/d977ac680103
 * DQL、DML、DDL、DCL的概念与区别：http://blog.csdn.net/tomatofly/article/details/5949070
-MyBatis Generator：http://mbg.cndocs.tk/
+* MyBatis Generator：http://mbg.cndocs.tk/
+* Spring Boot整合H2测试DAO：http://blog.csdn.net/mn960mn/article/details/54644908
+* h2内存数据库和mysql数据库的区别：http://blog.csdn.net/heymysweetheart/article/details/38526327

@@ -97,7 +97,7 @@
 					<!-- 如果指定了该参数，逗号隔开的这个表会被运行， 这些表名必须和 <table> 配置中的表面完全一致。 只有指定的这些表会被执行。 
 						如果没有指定该参数，所有的表都会被执行。 -->
 					<!-- 对于修改、新增的表,指定该属性进行构建比较合理 -->
-					<!-- <tableNames></tableNames> -->
+					<!-- <tableNames>group_members,group_authorities</tableNames> -->
 				</configuration>
 				<dependencies>
 					<!-- 配置这个依赖主要是为了等下在配置MG的时候可以不用配置classPathEntry这样的一个属性，避免代码的耦合度太高 -->

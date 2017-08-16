@@ -28,7 +28,7 @@
             <!-- 用来指定MBG生成的代码中是否包含任何注释
             	设置为false,运行多次插件,不会生成重复的内容
             	在pom.xml插件配置中,配置不重写文件,所以不需要插件生成的注释 -->
-            <property name="suppressAllComments" value="true" />
+            <property name="suppressAllComments" value="flase" />
         </commentGenerator>
 	
 		<!-- 元素定义如何连接目标数据库 -->
@@ -60,7 +60,7 @@
 
 		<!-- 元素来指定生成 SQL 映射文件所属的包和的目标项目 -->
 		<!-- 如果目标是MyBatis3，那么只有当您选择javaClientGenerator需要XML时，他才是 <context> 元素的一个必须的子元素。 -->
-		<sqlMapGenerator targetPackage="com.codelib.springboot.sample.mybatis.mapper"
+		<sqlMapGenerator targetPackage="mapper"
 			targetProject="src/main/resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
@@ -72,27 +72,26 @@
 		</javaClientGenerator>
 
 		<!-- 配置表映射 -->
-		<table tableName="users" domainObjectName="User">
+		<table tableName="courses" domainObjectName="Course">
 			<property name="constructorBased" value="true" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
 		</table>
-		<table tableName="authorities" domainObjectName="Authority">
+		<table tableName="students" domainObjectName="Student">
 			<property name="constructorBased" value="true" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
 		</table>
-		<table tableName="groups" domainObjectName="Group">
+		<table tableName="textbooks" domainObjectName="Textbook">
 			<property name="constructorBased" value="true" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
 		</table>
-		<table tableName="group_authorities" domainObjectName="GroupAuthority">
+		<table tableName="grades" domainObjectName="Grade">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+		<table tableName="student_courses" domainObjectName="StudentCourse">
 			<property name="constructorBased" value="true" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
-		</table>
-		<table tableName="group_members" domainObjectName="GroupMember">
-			<property name="constructorBased" value="true" />
-            <property name="ignoreQualifiersAtRuntime" value="true" />
-		</table>
-		
+		</table>		
 	</context>
 	
 </generatorConfiguration>

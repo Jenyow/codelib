@@ -69,5 +69,7 @@ SecurityAutoConfiguration 导入了 SpringBootWebSecurityConfiguration 中的配
 * Spring security Java Configuration ：http://docs.spring.io/spring-security/site/docs/4.2.3.RELEASE/reference/html/jc.html
 * Mybatis Mapper XML 文件：http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html
 * Spring Security教程：http://wiki.jikexueyuan.com/project/spring-security/
-* holder.js：https://github.com/imsky/holder
+* holder.js下载：https://github.com/imsky/holder
 * Thymeleaf：http://www.thymeleaf.org/
+* Mybatis 多对多：http://www.yiibai.com/mybatis/mybatis-many2many.html
+* mybatis 多对多 处理：http://www.360doc.com/content/14/0205/21/834950_350059484.shtml

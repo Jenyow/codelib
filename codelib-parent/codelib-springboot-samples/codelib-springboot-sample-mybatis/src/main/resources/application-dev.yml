@@ -9,7 +9,7 @@ spring:
         # 如果没有配置，将会生成一个名字， 格式是："DataSource-" + System.identityHashCode(this)
         # 另外配置此属性需要版本大于1.0.5，强行设置name会出错。
         name: mybatistest
-        url: jdbc:mysql://localhost:3306/db_mybatistest
+        url: jdbc:mysql://localhost:3306/db_dbtest
         username: root
         password: CFP5peaTAHiVixoYeqram5gcNR8p/EjsY5Sm0g+XFtOUvTOXV/LawLaIivNhOtyFn9TMxISaIOYR9gaL6lDgIQ==
         

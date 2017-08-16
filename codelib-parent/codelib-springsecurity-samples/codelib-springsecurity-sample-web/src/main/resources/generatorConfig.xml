@@ -83,6 +83,14 @@
             <property name="constructorBased" value="true" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
         </table>
+        <table tableName="group_members" domainObjectName="GroupMember">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="group_authorities" domainObjectName="GroupAuthority">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
     </context>
     
 </generatorConfiguration>

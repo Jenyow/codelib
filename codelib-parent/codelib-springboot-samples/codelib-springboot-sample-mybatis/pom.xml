@@ -9,6 +9,15 @@
 	<artifactId>codelib-springboot-sample-mybatis</artifactId>
 
 	<dependencies>
+        <!-- 测试 -->
+        <!-- h2内存数据库 -->
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<!-- 测试 END -->
+			    
 		<!-- spring boot 配置处理器 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

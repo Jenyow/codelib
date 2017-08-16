@@ -3,31 +3,24 @@ package com.codelib.springboot.sample.mybatis.config;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContextException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.util.StringUtils;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import com.codelib.springboot.sample.mybatis.properties.DruidProperties;
 
 @Configuration
 @EnableConfigurationProperties(DruidProperties.class)
 @EnableTransactionManagement
 public class DruidDataSourceConfig {
-
-	private static final Logger logger = LoggerFactory.getLogger(DruidDataSourceConfig.class);
 
 	@Autowired
 	private DruidProperties druidProperties;
@@ -44,13 +37,6 @@ public class DruidDataSourceConfig {
 		String url = druidProperties.getUrl();
 		String username = druidProperties.getUsername();
 		String password = druidProperties.getPassword();
-
-		if (StringUtils.isEmpty(url) || StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
-			logger.info(
-					"Your database connection pool configuration is incorrect! Please check your Spring profile, current profiles are:[{}]",
-					druidProperties.toString());
-			throw new ApplicationContextException("Database connection pool is not configured correctly");
-		}
 
 		DruidDataSource druidDataSource = new DruidDataSource();
 		druidDataSource.setName(druidProperties.getName());
