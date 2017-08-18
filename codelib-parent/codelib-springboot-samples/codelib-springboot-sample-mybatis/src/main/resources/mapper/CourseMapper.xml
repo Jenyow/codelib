@@ -13,6 +13,17 @@
       <arg column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
+  <resultMap id="CourseTextbookResultMap" type="com.codelib.springboot.sample.mybatis.pojo.Course">
+    <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="gradeId"  column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="textbookId"  column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <association property="textbook" column="textbook_id" javaType="com.codelib.springboot.sample.mybatis.pojo.Textbook" resultMap="textbookResult"/>
+  </resultMap>
+  <resultMap id="textbookResult" type="com.codelib.springboot.sample.mybatis.pojo.Textbook">
+    <id property="id" column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="name" column="textbook_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
@@ -113,6 +124,12 @@
     <include refid="Base_Column_List" />
     from courses
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCourseTextbookResultMapByPrimaryKey" parameterType="java.lang.Integer" resultMap="CourseTextbookResultMap">
+    select a.id, a.name, a.grade_id, a.textbook_id, b.id textbook_id, b.name textbook_name
+    from courses a
+    left join textbooks b on b.id=a.textbook_id
+    where a.id=#{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--

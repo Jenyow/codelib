@@ -1,9 +1,11 @@
 package com.codelib.springboot.sample.mybatis.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.codelib.springboot.sample.mybatis.pojo.Course;
 import com.codelib.springboot.sample.mybatis.pojo.CourseExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface CourseMapper {
     /**
@@ -93,4 +95,6 @@ public interface CourseMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Course record);
+    
+    Course selectCourseTextbookResultMapByPrimaryKey(Integer id);
 }

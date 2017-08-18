@@ -6,7 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +29,9 @@ public class StudentMapperTest {
 
 	@Autowired  
     private StudentMapper studentMapper;
+	
+	@Rule
+	public ExpectedException thrown= ExpectedException.none();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -80,6 +85,17 @@ public class StudentMapperTest {
 	public void testInsertException() {
 		// 初始化数据中已经包含主键为 1 的数据
 		Student student = new Student(1, "学生");
+        studentMapper.insert(student);
+	}
+	
+	/**
+	 * 异常测试的第二种方法
+	 */
+	@Test
+	public void testInsertException2() {
+		// 初始化数据中已经包含主键为 1 的数据
+		Student student = new Student(1, "学生");
+		thrown.expect(Exception.class);// 需要在预期抛出异常的方法前设置预期异常结果
         studentMapper.insert(student);
 	}
 
