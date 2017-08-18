@@ -40,6 +40,8 @@ public class MyBatisConfig {
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sqlSessionFactoryBean
 				.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+		// 在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。
+		sqlSessionFactoryBean.setTypeAliasesPackage("com.codelib.springboot.sample.mybatis.pojo");
 		return sqlSessionFactoryBean.getObject();
 	}
 }

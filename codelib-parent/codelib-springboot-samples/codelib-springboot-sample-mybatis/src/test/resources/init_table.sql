@@ -50,6 +50,7 @@ CREATE TABLE `textbooks` (
 INSERT INTO `textbooks` VALUES ('1', '《高等数学》');
 INSERT INTO `textbooks` VALUES ('2', '《Java编程基础》');
 INSERT INTO `textbooks` VALUES ('3', '《设计模式》');
+INSERT INTO `textbooks` VALUES ('4', '《大学英语I》');
 
 -- ----------------------------
 -- Table structure for courses
@@ -71,8 +72,9 @@ CREATE TABLE `courses` (
 -- Records of courses
 -- ----------------------------
 INSERT INTO `courses` VALUES ('1', '高等数学', '1', '1');
-INSERT INTO `courses` VALUES ('2', 'JAVA入门', '2', '2');
-INSERT INTO `courses` VALUES ('3', '设计模式', '3', '3');
+INSERT INTO `courses` VALUES ('2', '大学英语I', '4', '1');
+INSERT INTO `courses` VALUES ('3', 'JAVA入门', '2', '2');
+INSERT INTO `courses` VALUES ('4', '设计模式', '3', '3');
 
 -- ----------------------------
 -- Table structure for student_courses

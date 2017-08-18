@@ -13,14 +13,14 @@
       <arg column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <resultMap id="CourseTextbookResultMap" type="com.codelib.springboot.sample.mybatis.pojo.Course">
+  <resultMap id="CourseTextbookResultMap" type="course">
     <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
     <result property="gradeId"  column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     <result property="textbookId"  column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     <association property="textbook" column="textbook_id" javaType="com.codelib.springboot.sample.mybatis.pojo.Textbook" resultMap="textbookResult"/>
   </resultMap>
-  <resultMap id="textbookResult" type="com.codelib.springboot.sample.mybatis.pojo.Textbook">
+  <resultMap id="textbookResult" type="textbook">
     <id property="id" column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     <result property="name" column="textbook_name" javaType="java.lang.String" jdbcType="VARCHAR" />
   </resultMap>

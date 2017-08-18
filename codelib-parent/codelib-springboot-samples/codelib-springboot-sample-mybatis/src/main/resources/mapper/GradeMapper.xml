@@ -11,6 +11,18 @@
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
+  <resultMap id="GradeCoursesResultMap" type="Grade">
+    <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <collection property="courses" ofType="course" resultMap="CourseResultMap" />
+  </resultMap>
+  <resultMap id="CourseResultMap" type="course">
+	<id property="id" column="course_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="name" column="course_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="textbookId" column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="gradeId" column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+  </resultMap>
+	
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
@@ -111,6 +123,13 @@
     <include refid="Base_Column_List" />
     from grades
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectGradeCoursesResultMapByPrimaryKey" parameterType="java.lang.Integer" resultMap="GradeCoursesResultMap">
+    select 
+    a.id, a.name, b.id course_id, b.name course_name, b.textbook_id, b.grade_id 
+    from grades a
+    left join courses b on a.id=b.grade_id
+    where a.id = #{id,jdbcType=INTEGER}    
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--

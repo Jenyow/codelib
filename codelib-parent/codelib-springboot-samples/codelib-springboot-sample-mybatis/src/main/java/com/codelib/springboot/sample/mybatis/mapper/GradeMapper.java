@@ -93,4 +93,6 @@ public interface GradeMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Grade record);
+    
+    Grade selectGradeCoursesResultMapByPrimaryKey(Integer id);
 }
