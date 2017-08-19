@@ -2,6 +2,9 @@ package com.codelib.springboot.sample.mybatis.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.codelib.springboot.sample.mybatis.WebApplication;
 import com.codelib.springboot.sample.mybatis.config.DruidDataSourceConfig;
 import com.codelib.springboot.sample.mybatis.config.MyBatisConfig;
-import com.codelib.springboot.sample.mybatis.mapper.CourseMapper;
 import com.codelib.springboot.sample.mybatis.pojo.Course;
+import com.codelib.springboot.sample.mybatis.pojo.Student;
 import com.codelib.springboot.sample.mybatis.pojo.Textbook;
 import com.codelib.springboot.sample.mybatis.service.EducationService;
 
@@ -26,9 +29,6 @@ public class EducationServiceImplTest {
 
 	@Autowired
 	private EducationService educationService;
-	
-	@Autowired
-	private CourseMapper courseMapper;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -60,8 +60,18 @@ public class EducationServiceImplTest {
 
 	@Test
 	public void testInsertStudentCourses() {
-
-		//educationService.insertStudentCourses(student);
+		List<Course> courses = new ArrayList<>();
+		for (int i = 1; i < 4; i++) {
+			Course course = new Course();
+			course.setId(i);
+			courses.add(course);
+		}
+		Student student = new Student();
+		student.setId(4);
+		student.setCourses(courses);
+		int actual = educationService.insertStudentCourses(student);
+		int expected = 3;
+		assertEquals(expected, actual);
 	}
 
 }

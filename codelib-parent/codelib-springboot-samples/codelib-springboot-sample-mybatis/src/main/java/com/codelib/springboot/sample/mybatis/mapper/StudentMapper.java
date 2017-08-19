@@ -1,5 +1,6 @@
 package com.codelib.springboot.sample.mybatis.mapper;
 
+import com.codelib.springboot.sample.mybatis.pojo.Course;
 import com.codelib.springboot.sample.mybatis.pojo.Student;
 import com.codelib.springboot.sample.mybatis.pojo.StudentExample;
 import java.util.List;
@@ -93,4 +94,6 @@ public interface StudentMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Student record);
+
+	int insert(Integer id, List<Course> courses);
 }

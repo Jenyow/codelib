@@ -29,3 +29,4 @@ druid 监控地址：http://localhost:8080/codelib-springboot-sample-mybatis/dru
 * h2内存数据库和mysql数据库的区别：http://blog.csdn.net/heymysweetheart/article/details/38526327
 * 使用JUnit测试预期异常：http://blog.csdn.net/tayanxunhua/article/details/20570457
 * MyBatis关联查询，表字段相同，resultMap映射问题的解决办法：http://blog.csdn.net/zhaofuwu/article/details/52291342
+* Mybatis的一对一的关联映射 插入：http://blog.csdn.net/qq_25560423/article/details/73936116
