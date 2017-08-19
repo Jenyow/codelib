@@ -97,4 +97,6 @@ public interface CourseMapper {
     int updateByPrimaryKey(Course record);
     
     Course selectCourseTextbookResultMapByPrimaryKey(Integer id);
+    
+    Course selectCourseStudentsResultMapByPrimaryKey(Integer id);
 }

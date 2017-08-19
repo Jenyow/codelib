@@ -39,4 +39,14 @@ public class CourseMapperTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void selectCourseStudentsResultMapByPrimaryKey() {
+		Course course = coursemapper.selectCourseStudentsResultMapByPrimaryKey(1);
+		int actual = course.getStudents().size();
+		int expected = 3;
+		assertEquals(expected, actual);
+	}
+	
+	
+
 }
