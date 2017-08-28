@@ -1,8 +1,5 @@
 package com.codelib.springsecurity.sample.web.service.impl;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.codelib.springsecurity.sample.web.mapper.GroupMapper;
 import com.codelib.springsecurity.sample.web.mapper.GroupMemberMapper;
 import com.codelib.springsecurity.sample.web.mapper.UserMapper;
-import com.codelib.springsecurity.sample.web.pojo.Group;
+import com.codelib.springsecurity.sample.web.pojo.GroupMemberKey;
 import com.codelib.springsecurity.sample.web.pojo.User;
 import com.codelib.springsecurity.sample.web.service.RegisterService;
 
@@ -38,18 +35,21 @@ public class RegisterServiceImpl implements RegisterService {
 	public boolean registerUser(String username, String password) {
 		String encodePassword = passwordEncoder.encode(password);
 		logger.info("密码:{}, 加密结果:{}", password, encodePassword);
-		// 得到用户组信息
-		Group group =  groupMapper.selectByPrimaryKey(3);
-		Set<Group> groups = new HashSet<>();
-		groups.add(group);
-		
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(encodePassword);
-		user.setEnabled((short)1);// 激活帐号
-		user.setGroups(groups);
-		
-		int result = userMapper.insert(user);
+		int result = 0;
+		try {
+			User user = new User();
+			user.setUsername(username);
+			user.setPassword(encodePassword);
+			user.setEnabled((short)1);// 激活帐号
+			userMapper.insert(user);
+			// 给新注册用户一个默认的权限组
+			GroupMemberKey groupMemberKey = new GroupMemberKey(3, username);
+			groupMemberMapper.insert(groupMemberKey);
+			
+			result ++;
+		} catch (Exception e) {
+			logger.error("注册失败：{}", e.toString());
+		}
 		if (result >= 1) {
 			return true;
 		} else {

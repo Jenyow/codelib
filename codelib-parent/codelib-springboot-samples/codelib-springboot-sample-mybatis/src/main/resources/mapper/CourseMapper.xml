@@ -13,28 +13,6 @@
       <arg column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <resultMap id="CourseTextbookResultMap" type="course">
-    <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-    <result property="gradeId"  column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <result property="textbookId"  column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <association property="textbook" column="textbook_id" javaType="textbook" resultMap="TextbookResult"/>
-  </resultMap>
-  <resultMap id="CourseStudentsResultMap" type="course">
-    <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-    <result property="gradeId"  column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <result property="textbookId"  column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <collection property="students" ofType="student" resultMap="StudentResult" />
-  </resultMap>
-  <resultMap id="TextbookResult" type="textbook">
-    <id property="id" column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <result property="name" column="textbook_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="StudentResult" type="student">
-    <id property="id" column="student_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    <result property="name" column="student_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-  </resultMap>
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
@@ -135,20 +113,6 @@
     <include refid="Base_Column_List" />
     from courses
     where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectCourseTextbookResultMapByPrimaryKey" parameterType="java.lang.Integer" resultMap="CourseTextbookResultMap">
-    select a.id, a.name, a.grade_id, a.textbook_id, b.id textbook_id, b.name textbook_name
-    from courses a
-    left join textbooks b on b.id=a.textbook_id
-    where a.id=#{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectCourseStudentsResultMapByPrimaryKey" parameterType="int" resultMap="CourseStudentsResultMap">
-    select 
-    a.id, a.name, a.grade_id, a.textbook_id, c.id student_id, c.name student_name
-    from courses a
-    left join student_courses b on a.id=b.course_id
-    left join students c on b.student_id=c.id
-    where a.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -291,4 +255,40 @@
       grade_id = #{gradeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="CourseTextbookResultMap" type="course">
+    <id column="id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id" />
+    <result column="name" javaType="java.lang.String" jdbcType="VARCHAR" property="name" />
+    <result column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="gradeId" />
+    <result column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="textbookId" />
+    <association column="textbook_id" javaType="textbook" property="textbook" resultMap="TextbookResult" />
+  </resultMap>
+  <resultMap id="CourseStudentsResultMap" type="course">
+    <id column="id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id" />
+    <result column="name" javaType="java.lang.String" jdbcType="VARCHAR" property="name" />
+    <result column="grade_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="gradeId" />
+    <result column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="textbookId" />
+    <collection ofType="student" property="students" resultMap="StudentResult" />
+  </resultMap>
+  <resultMap id="TextbookResult" type="textbook">
+    <id column="textbook_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id" />
+    <result column="textbook_name" javaType="java.lang.String" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap id="StudentResult" type="student">
+    <id column="student_id" javaType="java.lang.Integer" jdbcType="INTEGER" property="id" />
+    <result column="student_name" javaType="java.lang.String" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <select id="selectCourseTextbookResultMapByPrimaryKey" parameterType="java.lang.Integer" resultMap="CourseTextbookResultMap">
+    select a.id, a.name, a.grade_id, a.textbook_id, b.id textbook_id, b.name textbook_name
+    from courses a
+    left join textbooks b on b.id=a.textbook_id
+    where a.id=#{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCourseStudentsResultMapByPrimaryKey" parameterType="int" resultMap="CourseStudentsResultMap">
+    select 
+    a.id, a.name, a.grade_id, a.textbook_id, c.id student_id, c.name student_name
+    from courses a
+    left join student_courses b on a.id=b.course_id
+    left join students c on b.student_id=c.id
+    where a.id = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

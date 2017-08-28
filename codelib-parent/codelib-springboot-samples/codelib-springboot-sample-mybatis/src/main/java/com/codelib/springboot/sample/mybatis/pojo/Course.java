@@ -49,8 +49,9 @@ public class Course implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    // 一对一
     private Textbook textbook;
-    
+    // 一对多
     private List<Student> students = new ArrayList<>();
     
     /**

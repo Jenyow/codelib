@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -15,15 +16,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private AuthenticationSuccessHandler loginSuccessHandler;
+	
 	/**
-	 * spring security 每一项配置用 **.and()** 连接
-	 * 调用该hasRole方法，因此不需要指定“ROLE_”前缀
+	 * spring security 每一项配置用 **.and()** 连接 调用该hasRole方法，因此不需要指定“ROLE_”前缀
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// http.authorizeRequests()每个匹配器按照它们被声明的顺序被考虑。
-		http
-			.authorizeRequests()
+		http.authorizeRequests()
 				// 所有用户均可访问的资源
 				.antMatchers("/css/**", "/js/**", "/images/**", "/plugins/**", "/webjars/**", "**/favicon.ico",
 						"/index", "/register").permitAll()
@@ -31,25 +33,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user/**").hasRole("USER")
 				// 任何尚未匹配的URL只需要验证用户即可访问
 				.anyRequest().authenticated()
-				.and()
+			.and()
 			.formLogin()
 				// 指定登录页面,授予所有用户访问登录页面
-				.loginPage("/login")
-				.permitAll()
-				.and()
+				.loginPage("/login").successHandler(loginSuccessHandler).failureUrl("/login?error=true").permitAll()
+			.and()
 			.headers()
-				.frameOptions().sameOrigin(); 
+				.frameOptions().sameOrigin();
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// auth.userDetailsService(userDetailsService);
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+		// 内存用户
+		// auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 }

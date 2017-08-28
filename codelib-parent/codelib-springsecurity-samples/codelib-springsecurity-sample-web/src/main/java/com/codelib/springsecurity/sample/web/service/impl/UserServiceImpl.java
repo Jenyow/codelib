@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loadUserByUsername(String username) {
-		User user = userMapper.selectByPrimaryKey(username);
+		User user = userMapper.loadUserByUsername(username);
 		return user;
 	}
 

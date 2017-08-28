@@ -240,4 +240,32 @@
       password = #{password,jdbcType=VARCHAR}
     where username = #{username,jdbcType=VARCHAR}
   </update>
+  <resultMap type="user" id="UserGroupsResultMap">
+    <id property="username" column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="enabled" column="enabled" javaType="java.lang.Short" jdbcType="SMALLINT" />
+    <result property="password" column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <collection property="groups" ofType="group" resultMap="GroupAuthoritysResultMap"></collection>
+  </resultMap>
+  <resultMap type="group" id="GroupAuthoritysResultMap">
+    <id property="id" column="group_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="groupName" column="group_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <collection property="authorities" ofType="authority" resultMap="AuthorityResultMap"></collection>
+  </resultMap>
+  <resultMap type="authority" id="AuthorityResultMap">
+    <id property="authority" column="authority" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="name" column="authority_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="loadUserByUsername" parameterType="string" resultMap="UserGroupsResultMap">
+    select 
+    a.username, a.password, a.enabled,
+    c.id group_id, c.group_name,
+    e.authority, e.name authority_name    
+    from users a
+    left join group_members b on a.username=b.username
+    left join groups c on b.group_id=c.id
+    left join group_authorities d on c.id=d.group_id
+    left join authorities e on d.authority=e.authority
+    where a.username = #{username,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

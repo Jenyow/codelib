@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 设置 sacn="true",当文件发生变化时,进行重新配置 。 -->
+<!-- 默认情况下，每隔一分钟扫描一次， configuration元素的scanPeriod属性控制扫描周期，其值可以带时间单位，包括：milliseconds、seconds、minutes和hours. 
+	如果没写明时间单位，则默认为毫秒。 -->
+<configuration scan="true" scanPeriod="30 milliseconds">
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/log.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/%d{yyyy/MM/dd}/%d{yyyy-MM-dd_HH}_%i.log.gz
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<!-- keep 30 days worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+	<!-- 在开发经常出现和参数类型相关的  4XX 错误，设置此项我们会看到更详细的错误信息 -->
+	<logger name="org.springframework.web" level="DEBUG"></logger>
+	<logger name="com.codelib.springsecurity.sample.web.mapper" level="DEBUG"></logger>
+</configuration>

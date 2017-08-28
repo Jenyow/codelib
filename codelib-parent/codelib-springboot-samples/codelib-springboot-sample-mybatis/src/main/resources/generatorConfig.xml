@@ -23,7 +23,7 @@
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" /> 
         
         <commentGenerator>
-        	<!-- 设置为flase,生成注释不包含时间时间戳 -->
+        	<!-- 设置为flase,生成注释包含时间时间戳 -->
         	<property name="suppressDate" value="true" />
             <!-- 用来指定MBG生成的代码中是否包含任何注释
             	设置为false,运行多次插件,不会生成重复的内容
