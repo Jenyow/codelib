@@ -25,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// http.authorizeRequests()每个匹配器按照它们被声明的顺序被考虑。
-		http.authorizeRequests()
+		http
+				.authorizeRequests()
 				// 所有用户均可访问的资源
 				.antMatchers("/css/**", "/js/**", "/images/**", "/plugins/**", "/webjars/**", "**/favicon.ico",
 						"/index", "/register").permitAll()
@@ -34,11 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// 任何尚未匹配的URL只需要验证用户即可访问
 				.anyRequest().authenticated()
 			.and()
-			.formLogin()
+				.formLogin()
 				// 指定登录页面,授予所有用户访问登录页面
 				.loginPage("/login").successHandler(loginSuccessHandler).failureUrl("/login?error=true").permitAll()
 			.and()
-			.headers()
+				.headers()
 				.frameOptions().sameOrigin();
 	}
 

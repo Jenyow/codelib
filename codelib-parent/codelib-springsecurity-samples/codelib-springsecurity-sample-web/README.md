@@ -73,4 +73,7 @@ SecurityAutoConfiguration 导入了 SpringBootWebSecurityConfiguration 中的配
 * Thymeleaf：http://www.thymeleaf.org/
 * Mybatis 多对多：http://www.yiibai.com/mybatis/mybatis-many2many.html
 * mybatis 多对多 处理：http://www.360doc.com/content/14/0205/21/834950_350059484.shtml
-* spring security四种实现方式：http://blog.csdn.net/bao19901210/article/details/52574340
+* Spring boot+Spring Security 4配置整合实例：http://blog.csdn.net/code__code/article/details/53885510
+* thymeleafexamples-springsecurity：https://github.com/thymeleaf/thymeleafexamples-springsecurity
+* Thymeleaf + Spring Security集成基础：http://www.thymeleaf.org/doc/articles/springsecurity.html
+* thymeleaf-extras-springsecurity：https://github.com/thymeleaf/thymeleaf-extras-springsecurity
