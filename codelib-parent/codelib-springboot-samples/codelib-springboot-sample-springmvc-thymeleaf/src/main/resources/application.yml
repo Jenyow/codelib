@@ -8,7 +8,12 @@ spring:
       active: dev
       thymeleaf: 
         cache: false
+    http: 
+      multipart: 
+         maxFileSize: 10Mb  
+         maxRequestSize: 100Mb  
 
 server:
   port: 8080
   context-path: /codelib-springboot-sample-springmvc-thymeleaf
+

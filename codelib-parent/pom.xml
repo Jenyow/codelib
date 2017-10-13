@@ -10,6 +10,8 @@
 		<module>codelib-web-ui-samples</module>
 		<module>codelib-springsecurity-samples</module>
 		<module>codelib-webservice-samples</module>
+		<module>codelib-oauth2-samples</module>
+		<module>codelib-springdata-samples</module>
 	</modules>
 
 	<properties>

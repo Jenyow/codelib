@@ -10,5 +10,7 @@
   <modules>
   	<module>codelib-webservice-sample-wsdl</module>
   	<module>codelib-webservice-sample-jdK</module>
+  	<module>codelib-webservice-sample-cxf</module>
+  	<module>codelib-webservice-sample-weather</module>
   </modules>
 </project>

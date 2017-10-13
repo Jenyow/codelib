@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>文档标题</title>
+</head>
+<body>
+	<a href="javascript:showPDF();">展示 PDF</a>
+	<a href="javascript:showPDFIframe();">展示 PDF IFrame</a>
+	<a th:href="@{data/pdf/643_a.pdf}" href="data/pdf/643_a.pdf" target="_blank">新窗口打开PDF</a>
+	<div id="pdfcontainer" style="display: none;">
+		<div class="lightbox"></div>
+		<div id="pop" class="pop">
+			<canvas id="the-canvas"></canvas>
+		</div>
+	</div>
+	<div class="page-content">
+		<!--<iframe src="plugins/pdfjs/web/viewer.html?file=../../../pdf/sf_openapi_document_V1.pdf" 
+				style="width: 100%; padding-bottom: 44px;"></iframe>-->
+	</div>
+
+	<script th:src="@{js/jquery.min.js}" src="../static/js/jquery.min.js"
+		type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{plugins/pdfjs/build/pdf.js}"
+		src="../static/plugins/pdfjs/build/pdf.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+	function showPDF() {
+		var container = document.getElementById("pdfcontainer");
+		container.style.display = "block";
+		var url = 'data/pdf/643_a.pdf';
+		PDFJS.workerSrc = 'plugins/pdfjs/build/pdf.worker.js';
+		PDFJS.getDocument(url).then(function getPdfHelloWorld(pdf) {
+			pdf.getPage(1).then(function getPageHelloWorld(page) {
+				var scale = 1;
+				var viewport = page.getViewport(scale);
+				var canvas = document.getElementById('the-canvas');
+				var context = canvas.getContext('2d');
+				canvas.height = viewport.height;
+				canvas.width = viewport.width;
+				var renderContext = {
+					canvasContext : context,
+					viewport : viewport
+				};
+				page.render(renderContext);
+			});
+		});
+	}
+	
+	function showPDFIframe() {
+		var x = window.document.body.clientWidth;// 获取屏幕宽度
+		var y = window.document.body.clientHeight;// 获取屏幕高度
+		var html = '<iframe src="plugins/pdfjs/web/viewer.html?file=';
+			html += "http://192.168.1.22:8080/codelib-springboot-sample-springmvc-thymeleaf/data/pdf/643_a.pdf"; 
+			html += '" style="width: 100%; height:'; 
+			html +=  (y-100);
+			html += 'px;"></iframe>';
+		$(".page-content").append(html);
+	}
+	//]]>
+	</script>
+</body>
+
+</html>

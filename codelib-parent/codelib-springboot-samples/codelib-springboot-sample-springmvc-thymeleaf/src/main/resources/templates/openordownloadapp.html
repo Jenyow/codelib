@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>文档标题</title>
+</head>
+<body>
+	<div style="font-size: 68px;">
+		<a href="javascript:open_or_download_app();">打开APP</a>
+		<span id="device"></span>
+	</div>
+	<script type="text/javascript">
+	//<![CDATA[
+	function open_or_download_app() {
+		var device = document.getElementById("device");
+		if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+			device.innerHTML = "ios设备";
+			// 判断useragent，当前设备为ios设备
+		    var loadDateTime = new Date();
+		　　// 设置时间阈值，在规定时间里面没有打开对应App的话，直接去App store进行下载。
+		    window.setTimeout(function() {
+			    var timeOutDateTime = new Date();
+			    if (timeOutDateTime - loadDateTime < 2000) {
+			    	window.location = "http://192.168.1.22:8080/codelib-springboot-sample-springmvc-thymeleaf/download";
+			    } else {
+			        window.close();
+			    }
+			},25);
+		 	window.location = "apptest://apptest";　　// Android端URL Schema
+		} else if (navigator.userAgent.match(/android/i)) {
+			device.innerHTML = "Android设备";
+			// 判断useragent，当前设备为Android设备
+			// 判断useragent，当前设备为ios设备
+		    var loadDateTime = new Date();
+		　　// 设置时间阈值，在规定时间里面没有打开对应App的话，直接去App store进行下载。
+		    window.setTimeout(function() {
+			    var timeOutDateTime = new Date();
+			    if (timeOutDateTime - loadDateTime < 2200) {
+			    	window.location = "http://192.168.1.22:8080/codelib-springboot-sample-springmvc-thymeleaf/download";
+			    } else {
+			        window.close();
+			    }
+			},2000);
+		　    window.location = "apptest://apptest";　　// Android端URL Schema 
+		} 
+	} 
+	//]]>
+	</script>
+</body>
+
+</html>
