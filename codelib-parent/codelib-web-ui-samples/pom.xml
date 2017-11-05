@@ -10,5 +10,6 @@
   <modules>
   	<module>codelib-web-ui-sample-autocomplete</module>
   	<module>codelib-web-ui-sample-select2</module>
+  	<module>codelib-web-ui-sample-knockout</module>
   </modules>
 </project>

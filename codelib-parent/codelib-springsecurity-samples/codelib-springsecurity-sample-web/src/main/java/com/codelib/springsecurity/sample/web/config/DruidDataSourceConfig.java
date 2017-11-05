@@ -107,7 +107,7 @@ public class DruidDataSourceConfig {
 	 * @return
 	 */
 	@Bean
-	public ServletRegistrationBean DruidStatViewServlet() {
+	public ServletRegistrationBean druidStatViewServlet() {
 		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(),
 				"/druid/*");
 		servletRegistrationBean.addInitParameter("allow", druidProperties.getServlet().getAllow());

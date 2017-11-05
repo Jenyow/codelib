@@ -9,5 +9,6 @@
   <packaging>pom</packaging>
   <modules>
   	<module>codelib-springdata-sample-jdbc-only</module>
+  	<module>codelib-springdata-sample-jdbctemplate</module>
   </modules>
 </project>
