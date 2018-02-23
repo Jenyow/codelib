@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Knockout test1</title>
+</head>
+
+<body>
+    <div>First name: <span data-bind="text: firstName"></span></div>
+    <div>Last name: <span data-bind="text: lastName"></span></div>
+    <div class="heading">Hello, <input data-bind="textInput: fullName"/></div>
+
+    <script type="text/javascript" src="../static/js/plugin/jquery/dist/jquery.min.js" th:src="@{js/plugin/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/js/plugin/knockout/dist/knockout.js" th:src="@{js/plugin/knockout/dist/knockout.js}"></script>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+        function MyViewModel() {
+            this.firstName = ko.observable('Planet');
+            this.lastName = ko.observable('Earth');
+            this.fullName = ko.pureComputed({
+                read: function () {
+                    return this.firstName() + " " + this.lastName();
+                },
+                write: function (value) {
+                    var lastSpacePos = value.lastIndexOf(" ");
+                    if (lastSpacePos > 0) { // 忽略无内容
+                        this.firstName(value.substring(0, lastSpacePos)); // 更新"firstName"的值
+                        this.lastName(value.substring(lastSpacePos + 1)); // 更新"lastName"的值
+                    }
+                },
+                owner: this
+            });
+        }
+        ko.applyBindings(new MyViewModel());
+    /*]]>*/
+    </script>
+</body>
+
+</html>

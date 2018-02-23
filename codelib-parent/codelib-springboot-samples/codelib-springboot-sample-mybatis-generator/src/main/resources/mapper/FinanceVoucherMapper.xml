@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.FinanceVoucherMapper">
+  <resultMap id="BaseResultMap" type="entities.business.FinanceVoucher">
+    <constructor>
+      <idArg column="VOUCHER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ORDER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="VOUCHER_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="VOUCHER_AMOUNT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="PAID_TYPE" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="FUND_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="IS_INVOICED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="INVOICED_STATUS" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="INVOICED_USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="INVOICED_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="AUDIT_USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AUDIT_STATUS" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="AUDIT_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="VOUCHER_STATUS" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="ACCOUNTING_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="IS_DELETED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="MEMO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="CREATE_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MODIFIED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MODIFIED_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VOUCHER_ID, ORDER_ID, VOUCHER_CODE, VOUCHER_AMOUNT, PAID_TYPE, FUND_DATE, IS_INVOICED, 
+    INVOICED_STATUS, INVOICED_USER_NAME, INVOICED_DATE, AUDIT_USER_ID, AUDIT_STATUS, 
+    AUDIT_TIME, VOUCHER_STATUS, ACCOUNTING_DATE, IS_DELETED, MEMO, CREATE_TIME, CREATE_USERID, 
+    MODIFIED_TIME, MODIFIED_USERID
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.FinanceVoucherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from finance_voucher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from finance_voucher
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from finance_voucher
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.FinanceVoucherExample">
+    delete from finance_voucher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.FinanceVoucher">
+    insert into finance_voucher (VOUCHER_ID, ORDER_ID, VOUCHER_CODE, 
+      VOUCHER_AMOUNT, PAID_TYPE, FUND_DATE, 
+      IS_INVOICED, INVOICED_STATUS, INVOICED_USER_NAME, 
+      INVOICED_DATE, AUDIT_USER_ID, AUDIT_STATUS, 
+      AUDIT_TIME, VOUCHER_STATUS, ACCOUNTING_DATE, 
+      IS_DELETED, MEMO, CREATE_TIME, 
+      CREATE_USERID, MODIFIED_TIME, MODIFIED_USERID
+      )
+    values (#{voucherId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{voucherCode,jdbcType=VARCHAR}, 
+      #{voucherAmount,jdbcType=DECIMAL}, #{paidType,jdbcType=SMALLINT}, #{fundDate,jdbcType=TIMESTAMP}, 
+      #{isInvoiced,jdbcType=BIT}, #{invoicedStatus,jdbcType=SMALLINT}, #{invoicedUserName,jdbcType=VARCHAR}, 
+      #{invoicedDate,jdbcType=TIMESTAMP}, #{auditUserId,jdbcType=VARCHAR}, #{auditStatus,jdbcType=SMALLINT}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{voucherStatus,jdbcType=SMALLINT}, #{accountingDate,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=BIT}, #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createUserid,jdbcType=VARCHAR}, #{modifiedTime,jdbcType=TIMESTAMP}, #{modifiedUserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.FinanceVoucher">
+    insert into finance_voucher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="voucherId != null">
+        VOUCHER_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="voucherCode != null">
+        VOUCHER_CODE,
+      </if>
+      <if test="voucherAmount != null">
+        VOUCHER_AMOUNT,
+      </if>
+      <if test="paidType != null">
+        PAID_TYPE,
+      </if>
+      <if test="fundDate != null">
+        FUND_DATE,
+      </if>
+      <if test="isInvoiced != null">
+        IS_INVOICED,
+      </if>
+      <if test="invoicedStatus != null">
+        INVOICED_STATUS,
+      </if>
+      <if test="invoicedUserName != null">
+        INVOICED_USER_NAME,
+      </if>
+      <if test="invoicedDate != null">
+        INVOICED_DATE,
+      </if>
+      <if test="auditUserId != null">
+        AUDIT_USER_ID,
+      </if>
+      <if test="auditStatus != null">
+        AUDIT_STATUS,
+      </if>
+      <if test="auditTime != null">
+        AUDIT_TIME,
+      </if>
+      <if test="voucherStatus != null">
+        VOUCHER_STATUS,
+      </if>
+      <if test="accountingDate != null">
+        ACCOUNTING_DATE,
+      </if>
+      <if test="isDeleted != null">
+        IS_DELETED,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID,
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME,
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="voucherId != null">
+        #{voucherId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="voucherCode != null">
+        #{voucherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="voucherAmount != null">
+        #{voucherAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="paidType != null">
+        #{paidType,jdbcType=SMALLINT},
+      </if>
+      <if test="fundDate != null">
+        #{fundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isInvoiced != null">
+        #{isInvoiced,jdbcType=BIT},
+      </if>
+      <if test="invoicedStatus != null">
+        #{invoicedStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="invoicedUserName != null">
+        #{invoicedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicedDate != null">
+        #{invoicedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUserId != null">
+        #{auditUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voucherStatus != null">
+        #{voucherStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="accountingDate != null">
+        #{accountingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.FinanceVoucherExample" resultType="java.lang.Long">
+    select count(*) from finance_voucher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update finance_voucher
+    <set>
+      <if test="record.voucherId != null">
+        VOUCHER_ID = #{record.voucherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.voucherCode != null">
+        VOUCHER_CODE = #{record.voucherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voucherAmount != null">
+        VOUCHER_AMOUNT = #{record.voucherAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paidType != null">
+        PAID_TYPE = #{record.paidType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fundDate != null">
+        FUND_DATE = #{record.fundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isInvoiced != null">
+        IS_INVOICED = #{record.isInvoiced,jdbcType=BIT},
+      </if>
+      <if test="record.invoicedStatus != null">
+        INVOICED_STATUS = #{record.invoicedStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.invoicedUserName != null">
+        INVOICED_USER_NAME = #{record.invoicedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoicedDate != null">
+        INVOICED_DATE = #{record.invoicedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditUserId != null">
+        AUDIT_USER_ID = #{record.auditUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatus != null">
+        AUDIT_STATUS = #{record.auditStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.auditTime != null">
+        AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.voucherStatus != null">
+        VOUCHER_STATUS = #{record.voucherStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.accountingDate != null">
+        ACCOUNTING_DATE = #{record.accountingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        IS_DELETED = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUserid != null">
+        CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifiedTime != null">
+        MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedUserid != null">
+        MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update finance_voucher
+    set VOUCHER_ID = #{record.voucherId,jdbcType=INTEGER},
+      ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      VOUCHER_CODE = #{record.voucherCode,jdbcType=VARCHAR},
+      VOUCHER_AMOUNT = #{record.voucherAmount,jdbcType=DECIMAL},
+      PAID_TYPE = #{record.paidType,jdbcType=SMALLINT},
+      FUND_DATE = #{record.fundDate,jdbcType=TIMESTAMP},
+      IS_INVOICED = #{record.isInvoiced,jdbcType=BIT},
+      INVOICED_STATUS = #{record.invoicedStatus,jdbcType=SMALLINT},
+      INVOICED_USER_NAME = #{record.invoicedUserName,jdbcType=VARCHAR},
+      INVOICED_DATE = #{record.invoicedDate,jdbcType=TIMESTAMP},
+      AUDIT_USER_ID = #{record.auditUserId,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{record.auditStatus,jdbcType=SMALLINT},
+      AUDIT_TIME = #{record.auditTime,jdbcType=TIMESTAMP},
+      VOUCHER_STATUS = #{record.voucherStatus,jdbcType=SMALLINT},
+      ACCOUNTING_DATE = #{record.accountingDate,jdbcType=TIMESTAMP},
+      IS_DELETED = #{record.isDeleted,jdbcType=BIT},
+      MEMO = #{record.memo,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.FinanceVoucher">
+    update finance_voucher
+    <set>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="voucherCode != null">
+        VOUCHER_CODE = #{voucherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="voucherAmount != null">
+        VOUCHER_AMOUNT = #{voucherAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="paidType != null">
+        PAID_TYPE = #{paidType,jdbcType=SMALLINT},
+      </if>
+      <if test="fundDate != null">
+        FUND_DATE = #{fundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isInvoiced != null">
+        IS_INVOICED = #{isInvoiced,jdbcType=BIT},
+      </if>
+      <if test="invoicedStatus != null">
+        INVOICED_STATUS = #{invoicedStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="invoicedUserName != null">
+        INVOICED_USER_NAME = #{invoicedUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicedDate != null">
+        INVOICED_DATE = #{invoicedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUserId != null">
+        AUDIT_USER_ID = #{auditUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        AUDIT_STATUS = #{auditStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="auditTime != null">
+        AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voucherStatus != null">
+        VOUCHER_STATUS = #{voucherStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="accountingDate != null">
+        ACCOUNTING_DATE = #{accountingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        IS_DELETED = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.FinanceVoucher">
+    update finance_voucher
+    set ORDER_ID = #{orderId,jdbcType=INTEGER},
+      VOUCHER_CODE = #{voucherCode,jdbcType=VARCHAR},
+      VOUCHER_AMOUNT = #{voucherAmount,jdbcType=DECIMAL},
+      PAID_TYPE = #{paidType,jdbcType=SMALLINT},
+      FUND_DATE = #{fundDate,jdbcType=TIMESTAMP},
+      IS_INVOICED = #{isInvoiced,jdbcType=BIT},
+      INVOICED_STATUS = #{invoicedStatus,jdbcType=SMALLINT},
+      INVOICED_USER_NAME = #{invoicedUserName,jdbcType=VARCHAR},
+      INVOICED_DATE = #{invoicedDate,jdbcType=TIMESTAMP},
+      AUDIT_USER_ID = #{auditUserId,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{auditStatus,jdbcType=SMALLINT},
+      AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+      VOUCHER_STATUS = #{voucherStatus,jdbcType=SMALLINT},
+      ACCOUNTING_DATE = #{accountingDate,jdbcType=TIMESTAMP},
+      IS_DELETED = #{isDeleted,jdbcType=BIT},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR}
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,21 @@
+{
+  "name": "resources",
+  "homepage": "https://github.com/Jenyow/codelib",
+  "authors": [
+    "jenyow <624853336@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery-validation": "jquery-validate#1.17.0",
+    "jquery": "1.12.4"
+  }
+}

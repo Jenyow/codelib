@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Knockout test1</title>
+</head>
+
+<body>
+    Choose a ticket class:
+    <select
+        data-bind="options: tickets, 
+                       optionsCaption: 'Choose...',
+                       optionsText: 'name',
+                       value: chosenTicket">
+    </select>
+
+    <button data-bind="enable: chosenTicket, click: resetTicket">Clear</button>
+
+    <p data-bind="with: chosenTicket">
+        You have chosen <b data-bind="text: name"></b> ($<span data-bind="text: price"></span>)
+    </p>
+
+    <script type="text/javascript" src="../static/js/plugin/jquery/dist/jquery.min.js" th:src="@{js/plugin/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/js/plugin/knockout/dist/knockout.js" th:src="@{js/plugin/knockout/dist/knockout.js}"></script>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+        function TicketsViewModel() {
+            this.tickets = [ {
+                name : "小赞",
+                price : 199.95
+            }, {
+                name : "小药",
+                price : 100.00
+            }, {
+                name : "小耀",
+                price : 99.00
+            } ];
+            this.chosenTicket = ko.observable();
+            this.resetTicket = function() {
+                this.chosenTicket(null)
+            }
+        }
+        ko.applyBindings(new TicketsViewModel());
+    /*]]>*/
+    </script>
+</body>
+
+</html>

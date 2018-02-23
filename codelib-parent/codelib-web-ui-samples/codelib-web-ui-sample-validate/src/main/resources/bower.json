@@ -1,0 +1,25 @@
+{
+  "name": "resources",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "jenyow <624853336@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Jenyow/codelib",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.4"
+  },
+  "devDependencies": {
+    "jquery": "1.12.4",
+    "jquery-validation": "jquery-validate#1.17.0"
+  }
+}

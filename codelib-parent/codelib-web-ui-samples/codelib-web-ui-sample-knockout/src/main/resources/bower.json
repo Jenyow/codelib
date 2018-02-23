@@ -1,0 +1,21 @@
+{
+  "name": "plugin",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "jenyow <624853336@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Jenyow/codelib",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.4",
+    "knockout": "3.4.2"
+  }
+}

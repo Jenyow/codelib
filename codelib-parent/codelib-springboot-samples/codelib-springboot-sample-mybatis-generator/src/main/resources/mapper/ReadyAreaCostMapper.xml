@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.ReadyAreaCostMapper">
+  <resultMap id="BaseResultMap" type="entities.business.ReadyAreaCost">
+    <constructor>
+      <idArg column="AREA_COST_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="EXPRESS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AREA_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COST_LOGISTICS" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="COST_COLD_CHAIN" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="IS_USING" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MODIFIED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AREA_COST_ID, EXPRESS_ID, AREA_ID, COST_LOGISTICS, COST_COLD_CHAIN, IS_USING, CREATE_TIME, 
+    MODIFIED_TIME
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.ReadyAreaCostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ready_area_cost
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ready_area_cost
+    where AREA_COST_ID = #{areaCostId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ready_area_cost
+    where AREA_COST_ID = #{areaCostId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.ReadyAreaCostExample">
+    delete from ready_area_cost
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.ReadyAreaCost">
+    insert into ready_area_cost (AREA_COST_ID, EXPRESS_ID, AREA_ID, 
+      COST_LOGISTICS, COST_COLD_CHAIN, IS_USING, 
+      CREATE_TIME, MODIFIED_TIME)
+    values (#{areaCostId,jdbcType=VARCHAR}, #{expressId,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, 
+      #{costLogistics,jdbcType=DECIMAL}, #{costColdChain,jdbcType=DECIMAL}, #{isUsing,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.ReadyAreaCost">
+    insert into ready_area_cost
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="areaCostId != null">
+        AREA_COST_ID,
+      </if>
+      <if test="expressId != null">
+        EXPRESS_ID,
+      </if>
+      <if test="areaId != null">
+        AREA_ID,
+      </if>
+      <if test="costLogistics != null">
+        COST_LOGISTICS,
+      </if>
+      <if test="costColdChain != null">
+        COST_COLD_CHAIN,
+      </if>
+      <if test="isUsing != null">
+        IS_USING,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="areaCostId != null">
+        #{areaCostId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressId != null">
+        #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="costLogistics != null">
+        #{costLogistics,jdbcType=DECIMAL},
+      </if>
+      <if test="costColdChain != null">
+        #{costColdChain,jdbcType=DECIMAL},
+      </if>
+      <if test="isUsing != null">
+        #{isUsing,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.ReadyAreaCostExample" resultType="java.lang.Long">
+    select count(*) from ready_area_cost
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ready_area_cost
+    <set>
+      <if test="record.areaCostId != null">
+        AREA_COST_ID = #{record.areaCostId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressId != null">
+        EXPRESS_ID = #{record.expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaId != null">
+        AREA_ID = #{record.areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costLogistics != null">
+        COST_LOGISTICS = #{record.costLogistics,jdbcType=DECIMAL},
+      </if>
+      <if test="record.costColdChain != null">
+        COST_COLD_CHAIN = #{record.costColdChain,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isUsing != null">
+        IS_USING = #{record.isUsing,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedTime != null">
+        MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ready_area_cost
+    set AREA_COST_ID = #{record.areaCostId,jdbcType=VARCHAR},
+      EXPRESS_ID = #{record.expressId,jdbcType=VARCHAR},
+      AREA_ID = #{record.areaId,jdbcType=VARCHAR},
+      COST_LOGISTICS = #{record.costLogistics,jdbcType=DECIMAL},
+      COST_COLD_CHAIN = #{record.costColdChain,jdbcType=DECIMAL},
+      IS_USING = #{record.isUsing,jdbcType=BIT},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.ReadyAreaCost">
+    update ready_area_cost
+    <set>
+      <if test="expressId != null">
+        EXPRESS_ID = #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        AREA_ID = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="costLogistics != null">
+        COST_LOGISTICS = #{costLogistics,jdbcType=DECIMAL},
+      </if>
+      <if test="costColdChain != null">
+        COST_COLD_CHAIN = #{costColdChain,jdbcType=DECIMAL},
+      </if>
+      <if test="isUsing != null">
+        IS_USING = #{isUsing,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where AREA_COST_ID = #{areaCostId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.ReadyAreaCost">
+    update ready_area_cost
+    set EXPRESS_ID = #{expressId,jdbcType=VARCHAR},
+      AREA_ID = #{areaId,jdbcType=VARCHAR},
+      COST_LOGISTICS = #{costLogistics,jdbcType=DECIMAL},
+      COST_COLD_CHAIN = #{costColdChain,jdbcType=DECIMAL},
+      IS_USING = #{isUsing,jdbcType=BIT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP}
+    where AREA_COST_ID = #{areaCostId,jdbcType=VARCHAR}
+  </update>
+</mapper>

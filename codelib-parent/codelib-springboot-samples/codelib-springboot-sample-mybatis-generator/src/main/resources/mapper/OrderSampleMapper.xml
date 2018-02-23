@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.OrderSampleMapper">
+  <resultMap id="BaseResultMap" type="entities.business.OrderSample">
+    <constructor>
+      <idArg column="SAMPLE_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="GOODS_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="SAMPLE_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="IS_INVALID" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="RESAMPLED_REASON" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="IS_RESAMPLED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="IS_DELETED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="MEMO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ORDER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="LOGISTICS_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="CREATE_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MODIFIED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MODIFIED_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SAMPLE_ID, GOODS_ID, SAMPLE_CODE, IS_INVALID, RESAMPLED_REASON, IS_RESAMPLED, IS_DELETED, 
+    MEMO, ORDER_ID, LOGISTICS_ID, CREATE_TIME, CREATE_USERID, MODIFIED_TIME, MODIFIED_USERID
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.OrderSampleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_sample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_sample
+    where SAMPLE_ID = #{sampleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_sample
+    where SAMPLE_ID = #{sampleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.OrderSampleExample">
+    delete from order_sample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.OrderSample">
+    insert into order_sample (SAMPLE_ID, GOODS_ID, SAMPLE_CODE, 
+      IS_INVALID, RESAMPLED_REASON, IS_RESAMPLED, 
+      IS_DELETED, MEMO, ORDER_ID, 
+      LOGISTICS_ID, CREATE_TIME, CREATE_USERID, 
+      MODIFIED_TIME, MODIFIED_USERID)
+    values (#{sampleId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{sampleCode,jdbcType=VARCHAR}, 
+      #{isInvalid,jdbcType=BIT}, #{resampledReason,jdbcType=VARCHAR}, #{isResampled,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT}, #{memo,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, 
+      #{logisticsId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, 
+      #{modifiedTime,jdbcType=TIMESTAMP}, #{modifiedUserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.OrderSample">
+    insert into order_sample
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sampleId != null">
+        SAMPLE_ID,
+      </if>
+      <if test="goodsId != null">
+        GOODS_ID,
+      </if>
+      <if test="sampleCode != null">
+        SAMPLE_CODE,
+      </if>
+      <if test="isInvalid != null">
+        IS_INVALID,
+      </if>
+      <if test="resampledReason != null">
+        RESAMPLED_REASON,
+      </if>
+      <if test="isResampled != null">
+        IS_RESAMPLED,
+      </if>
+      <if test="isDeleted != null">
+        IS_DELETED,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="logisticsId != null">
+        LOGISTICS_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID,
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME,
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sampleId != null">
+        #{sampleId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="sampleCode != null">
+        #{sampleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvalid != null">
+        #{isInvalid,jdbcType=BIT},
+      </if>
+      <if test="resampledReason != null">
+        #{resampledReason,jdbcType=VARCHAR},
+      </if>
+      <if test="isResampled != null">
+        #{isResampled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsId != null">
+        #{logisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.OrderSampleExample" resultType="java.lang.Long">
+    select count(*) from order_sample
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order_sample
+    <set>
+      <if test="record.sampleId != null">
+        SAMPLE_ID = #{record.sampleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null">
+        GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sampleCode != null">
+        SAMPLE_CODE = #{record.sampleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isInvalid != null">
+        IS_INVALID = #{record.isInvalid,jdbcType=BIT},
+      </if>
+      <if test="record.resampledReason != null">
+        RESAMPLED_REASON = #{record.resampledReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isResampled != null">
+        IS_RESAMPLED = #{record.isResampled,jdbcType=BIT},
+      </if>
+      <if test="record.isDeleted != null">
+        IS_DELETED = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsId != null">
+        LOGISTICS_ID = #{record.logisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUserid != null">
+        CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifiedTime != null">
+        MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedUserid != null">
+        MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order_sample
+    set SAMPLE_ID = #{record.sampleId,jdbcType=INTEGER},
+      GOODS_ID = #{record.goodsId,jdbcType=INTEGER},
+      SAMPLE_CODE = #{record.sampleCode,jdbcType=VARCHAR},
+      IS_INVALID = #{record.isInvalid,jdbcType=BIT},
+      RESAMPLED_REASON = #{record.resampledReason,jdbcType=VARCHAR},
+      IS_RESAMPLED = #{record.isResampled,jdbcType=BIT},
+      IS_DELETED = #{record.isDeleted,jdbcType=BIT},
+      MEMO = #{record.memo,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      LOGISTICS_ID = #{record.logisticsId,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.OrderSample">
+    update order_sample
+    <set>
+      <if test="goodsId != null">
+        GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="sampleCode != null">
+        SAMPLE_CODE = #{sampleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvalid != null">
+        IS_INVALID = #{isInvalid,jdbcType=BIT},
+      </if>
+      <if test="resampledReason != null">
+        RESAMPLED_REASON = #{resampledReason,jdbcType=VARCHAR},
+      </if>
+      <if test="isResampled != null">
+        IS_RESAMPLED = #{isResampled,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        IS_DELETED = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsId != null">
+        LOGISTICS_ID = #{logisticsId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SAMPLE_ID = #{sampleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.OrderSample">
+    update order_sample
+    set GOODS_ID = #{goodsId,jdbcType=INTEGER},
+      SAMPLE_CODE = #{sampleCode,jdbcType=VARCHAR},
+      IS_INVALID = #{isInvalid,jdbcType=BIT},
+      RESAMPLED_REASON = #{resampledReason,jdbcType=VARCHAR},
+      IS_RESAMPLED = #{isResampled,jdbcType=BIT},
+      IS_DELETED = #{isDeleted,jdbcType=BIT},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=INTEGER},
+      LOGISTICS_ID = #{logisticsId,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR}
+    where SAMPLE_ID = #{sampleId,jdbcType=INTEGER}
+  </update>
+</mapper>

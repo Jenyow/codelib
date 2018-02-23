@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.ProjectPackageMapper">
+  <resultMap id="BaseResultMap" type="entities.business.ProjectPackage">
+    <constructor>
+      <idArg column="PACKAGE_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CATEGORY_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SHORT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="IS_ENABLED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="IS_OPENED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="ORIGINAL_PRICE" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="PRICE" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="CONTENT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MEMO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="CREATE_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MODIFIED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MODIFIED_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    PACKAGE_ID, CATEGORY_ID, NAME, SHORT_NAME, IS_ENABLED, IS_OPENED, ORIGINAL_PRICE, 
+    PRICE, CONTENT, MEMO, CREATE_TIME, CREATE_USERID, MODIFIED_TIME, MODIFIED_USERID
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.ProjectPackageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from project_package
+    where PACKAGE_ID = #{packageId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from project_package
+    where PACKAGE_ID = #{packageId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.ProjectPackageExample">
+    delete from project_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.ProjectPackage">
+    insert into project_package (PACKAGE_ID, CATEGORY_ID, NAME, 
+      SHORT_NAME, IS_ENABLED, IS_OPENED, 
+      ORIGINAL_PRICE, PRICE, CONTENT, 
+      MEMO, CREATE_TIME, CREATE_USERID, 
+      MODIFIED_TIME, MODIFIED_USERID)
+    values (#{packageId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{shortName,jdbcType=VARCHAR}, #{isEnabled,jdbcType=BIT}, #{isOpened,jdbcType=BIT}, 
+      #{originalPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{content,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, 
+      #{modifiedTime,jdbcType=TIMESTAMP}, #{modifiedUserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.ProjectPackage">
+    insert into project_package
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="packageId != null">
+        PACKAGE_ID,
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME,
+      </if>
+      <if test="isEnabled != null">
+        IS_ENABLED,
+      </if>
+      <if test="isOpened != null">
+        IS_OPENED,
+      </if>
+      <if test="originalPrice != null">
+        ORIGINAL_PRICE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID,
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME,
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="packageId != null">
+        #{packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isOpened != null">
+        #{isOpened,jdbcType=BIT},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.ProjectPackageExample" resultType="java.lang.Long">
+    select count(*) from project_package
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update project_package
+    <set>
+      <if test="record.packageId != null">
+        PACKAGE_ID = #{record.packageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName != null">
+        SHORT_NAME = #{record.shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEnabled != null">
+        IS_ENABLED = #{record.isEnabled,jdbcType=BIT},
+      </if>
+      <if test="record.isOpened != null">
+        IS_OPENED = #{record.isOpened,jdbcType=BIT},
+      </if>
+      <if test="record.originalPrice != null">
+        ORIGINAL_PRICE = #{record.originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUserid != null">
+        CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifiedTime != null">
+        MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedUserid != null">
+        MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update project_package
+    set PACKAGE_ID = #{record.packageId,jdbcType=VARCHAR},
+      CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      SHORT_NAME = #{record.shortName,jdbcType=VARCHAR},
+      IS_ENABLED = #{record.isEnabled,jdbcType=BIT},
+      IS_OPENED = #{record.isOpened,jdbcType=BIT},
+      ORIGINAL_PRICE = #{record.originalPrice,jdbcType=DECIMAL},
+      PRICE = #{record.price,jdbcType=DECIMAL},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      MEMO = #{record.memo,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.ProjectPackage">
+    update project_package
+    <set>
+      <if test="categoryId != null">
+        CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        IS_ENABLED = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isOpened != null">
+        IS_OPENED = #{isOpened,jdbcType=BIT},
+      </if>
+      <if test="originalPrice != null">
+        ORIGINAL_PRICE = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PACKAGE_ID = #{packageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.ProjectPackage">
+    update project_package
+    set CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      IS_ENABLED = #{isEnabled,jdbcType=BIT},
+      IS_OPENED = #{isOpened,jdbcType=BIT},
+      ORIGINAL_PRICE = #{originalPrice,jdbcType=DECIMAL},
+      PRICE = #{price,jdbcType=DECIMAL},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR}
+    where PACKAGE_ID = #{packageId,jdbcType=VARCHAR}
+  </update>
+</mapper>

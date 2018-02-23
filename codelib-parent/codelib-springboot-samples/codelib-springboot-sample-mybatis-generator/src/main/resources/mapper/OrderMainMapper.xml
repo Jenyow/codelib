@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.OrderMainMapper">
+  <resultMap id="BaseResultMap" type="entities.business.OrderMain">
+    <constructor>
+      <idArg column="ORDER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ORDER_UUID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ORDER_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PROJECT_AMOUNT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="LOGISTICS_AMOUNT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="ORDER_AMOUNT" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="GENDER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MOBILE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AGE" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="HOSPITAL_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BED_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ATTENDING_PHYSICIAN" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="INVOICE_TYPE" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="REPORT_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOGISTICS_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PAID_TYPE" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="ORDER_STATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="MEMO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="INTRODUCTION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COMPANY_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DOCTOR_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PROFESSOR_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="CREATE_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MODIFIED_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="MODIFIED_USERID" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORDER_ID, ORDER_UUID, ORDER_CODE, PROJECT_AMOUNT, LOGISTICS_AMOUNT, ORDER_AMOUNT, 
+    USER_ID, USER_NAME, GENDER, MOBILE, AGE, ADDRESS, HOSPITAL_CODE, BED_CODE, ATTENDING_PHYSICIAN, 
+    INVOICE_TYPE, REPORT_TYPE, LOGISTICS_TYPE, PAID_TYPE, ORDER_STATUS, MEMO, INTRODUCTION, 
+    COMPANY_ID, DOCTOR_ID, PROFESSOR_ID, CREATE_TIME, CREATE_USERID, MODIFIED_TIME, MODIFIED_USERID
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.OrderMainExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_main
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_main
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_main
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.OrderMainExample">
+    delete from order_main
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.OrderMain">
+    insert into order_main (ORDER_ID, ORDER_UUID, ORDER_CODE, 
+      PROJECT_AMOUNT, LOGISTICS_AMOUNT, ORDER_AMOUNT, 
+      USER_ID, USER_NAME, GENDER, 
+      MOBILE, AGE, ADDRESS, 
+      HOSPITAL_CODE, BED_CODE, ATTENDING_PHYSICIAN, 
+      INVOICE_TYPE, REPORT_TYPE, LOGISTICS_TYPE, 
+      PAID_TYPE, ORDER_STATUS, MEMO, 
+      INTRODUCTION, COMPANY_ID, DOCTOR_ID, 
+      PROFESSOR_ID, CREATE_TIME, CREATE_USERID, 
+      MODIFIED_TIME, MODIFIED_USERID)
+    values (#{orderId,jdbcType=INTEGER}, #{orderUuid,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, 
+      #{projectAmount,jdbcType=DECIMAL}, #{logisticsAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, 
+      #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, #{address,jdbcType=VARCHAR}, 
+      #{hospitalCode,jdbcType=VARCHAR}, #{bedCode,jdbcType=VARCHAR}, #{attendingPhysician,jdbcType=VARCHAR}, 
+      #{invoiceType,jdbcType=SMALLINT}, #{reportType,jdbcType=VARCHAR}, #{logisticsType,jdbcType=VARCHAR}, 
+      #{paidType,jdbcType=SMALLINT}, #{orderStatus,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{doctorId,jdbcType=VARCHAR}, 
+      #{professorId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserid,jdbcType=VARCHAR}, 
+      #{modifiedTime,jdbcType=TIMESTAMP}, #{modifiedUserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.OrderMain">
+    insert into order_main
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="orderUuid != null">
+        ORDER_UUID,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="projectAmount != null">
+        PROJECT_AMOUNT,
+      </if>
+      <if test="logisticsAmount != null">
+        LOGISTICS_AMOUNT,
+      </if>
+      <if test="orderAmount != null">
+        ORDER_AMOUNT,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="hospitalCode != null">
+        HOSPITAL_CODE,
+      </if>
+      <if test="bedCode != null">
+        BED_CODE,
+      </if>
+      <if test="attendingPhysician != null">
+        ATTENDING_PHYSICIAN,
+      </if>
+      <if test="invoiceType != null">
+        INVOICE_TYPE,
+      </if>
+      <if test="reportType != null">
+        REPORT_TYPE,
+      </if>
+      <if test="logisticsType != null">
+        LOGISTICS_TYPE,
+      </if>
+      <if test="paidType != null">
+        PAID_TYPE,
+      </if>
+      <if test="orderStatus != null">
+        ORDER_STATUS,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="introduction != null">
+        INTRODUCTION,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="doctorId != null">
+        DOCTOR_ID,
+      </if>
+      <if test="professorId != null">
+        PROFESSOR_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID,
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME,
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderUuid != null">
+        #{orderUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAmount != null">
+        #{projectAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="logisticsAmount != null">
+        #{logisticsAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmount != null">
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalCode != null">
+        #{hospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bedCode != null">
+        #{bedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingPhysician != null">
+        #{attendingPhysician,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null">
+        #{invoiceType,jdbcType=SMALLINT},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsType != null">
+        #{logisticsType,jdbcType=VARCHAR},
+      </if>
+      <if test="paidType != null">
+        #{paidType,jdbcType=SMALLINT},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="professorId != null">
+        #{professorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.OrderMainExample" resultType="java.lang.Long">
+    select count(*) from order_main
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order_main
+    <set>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderUuid != null">
+        ORDER_UUID = #{record.orderUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCode != null">
+        ORDER_CODE = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectAmount != null">
+        PROJECT_AMOUNT = #{record.projectAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.logisticsAmount != null">
+        LOGISTICS_AMOUNT = #{record.logisticsAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderAmount != null">
+        ORDER_AMOUNT = #{record.orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        GENDER = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        AGE = #{record.age,jdbcType=TINYINT},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hospitalCode != null">
+        HOSPITAL_CODE = #{record.hospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bedCode != null">
+        BED_CODE = #{record.bedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attendingPhysician != null">
+        ATTENDING_PHYSICIAN = #{record.attendingPhysician,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceType != null">
+        INVOICE_TYPE = #{record.invoiceType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.reportType != null">
+        REPORT_TYPE = #{record.reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticsType != null">
+        LOGISTICS_TYPE = #{record.logisticsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paidType != null">
+        PAID_TYPE = #{record.paidType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.orderStatus != null">
+        ORDER_STATUS = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduction != null">
+        INTRODUCTION = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        COMPANY_ID = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorId != null">
+        DOCTOR_ID = #{record.doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professorId != null">
+        PROFESSOR_ID = #{record.professorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUserid != null">
+        CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifiedTime != null">
+        MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifiedUserid != null">
+        MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order_main
+    set ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      ORDER_UUID = #{record.orderUuid,jdbcType=VARCHAR},
+      ORDER_CODE = #{record.orderCode,jdbcType=VARCHAR},
+      PROJECT_AMOUNT = #{record.projectAmount,jdbcType=DECIMAL},
+      LOGISTICS_AMOUNT = #{record.logisticsAmount,jdbcType=DECIMAL},
+      ORDER_AMOUNT = #{record.orderAmount,jdbcType=DECIMAL},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      GENDER = #{record.gender,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=TINYINT},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      HOSPITAL_CODE = #{record.hospitalCode,jdbcType=VARCHAR},
+      BED_CODE = #{record.bedCode,jdbcType=VARCHAR},
+      ATTENDING_PHYSICIAN = #{record.attendingPhysician,jdbcType=VARCHAR},
+      INVOICE_TYPE = #{record.invoiceType,jdbcType=SMALLINT},
+      REPORT_TYPE = #{record.reportType,jdbcType=VARCHAR},
+      LOGISTICS_TYPE = #{record.logisticsType,jdbcType=VARCHAR},
+      PAID_TYPE = #{record.paidType,jdbcType=SMALLINT},
+      ORDER_STATUS = #{record.orderStatus,jdbcType=INTEGER},
+      MEMO = #{record.memo,jdbcType=VARCHAR},
+      INTRODUCTION = #{record.introduction,jdbcType=VARCHAR},
+      COMPANY_ID = #{record.companyId,jdbcType=VARCHAR},
+      DOCTOR_ID = #{record.doctorId,jdbcType=VARCHAR},
+      PROFESSOR_ID = #{record.professorId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{record.createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{record.modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{record.modifiedUserid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.OrderMain">
+    update order_main
+    <set>
+      <if test="orderUuid != null">
+        ORDER_UUID = #{orderUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAmount != null">
+        PROJECT_AMOUNT = #{projectAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="logisticsAmount != null">
+        LOGISTICS_AMOUNT = #{logisticsAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmount != null">
+        ORDER_AMOUNT = #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalCode != null">
+        HOSPITAL_CODE = #{hospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bedCode != null">
+        BED_CODE = #{bedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingPhysician != null">
+        ATTENDING_PHYSICIAN = #{attendingPhysician,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceType != null">
+        INVOICE_TYPE = #{invoiceType,jdbcType=SMALLINT},
+      </if>
+      <if test="reportType != null">
+        REPORT_TYPE = #{reportType,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsType != null">
+        LOGISTICS_TYPE = #{logisticsType,jdbcType=VARCHAR},
+      </if>
+      <if test="paidType != null">
+        PAID_TYPE = #{paidType,jdbcType=SMALLINT},
+      </if>
+      <if test="orderStatus != null">
+        ORDER_STATUS = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        DOCTOR_ID = #{doctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="professorId != null">
+        PROFESSOR_ID = #{professorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserid != null">
+        CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedTime != null">
+        MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserid != null">
+        MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.OrderMain">
+    update order_main
+    set ORDER_UUID = #{orderUuid,jdbcType=VARCHAR},
+      ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      PROJECT_AMOUNT = #{projectAmount,jdbcType=DECIMAL},
+      LOGISTICS_AMOUNT = #{logisticsAmount,jdbcType=DECIMAL},
+      ORDER_AMOUNT = #{orderAmount,jdbcType=DECIMAL},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=TINYINT},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      HOSPITAL_CODE = #{hospitalCode,jdbcType=VARCHAR},
+      BED_CODE = #{bedCode,jdbcType=VARCHAR},
+      ATTENDING_PHYSICIAN = #{attendingPhysician,jdbcType=VARCHAR},
+      INVOICE_TYPE = #{invoiceType,jdbcType=SMALLINT},
+      REPORT_TYPE = #{reportType,jdbcType=VARCHAR},
+      LOGISTICS_TYPE = #{logisticsType,jdbcType=VARCHAR},
+      PAID_TYPE = #{paidType,jdbcType=SMALLINT},
+      ORDER_STATUS = #{orderStatus,jdbcType=INTEGER},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      DOCTOR_ID = #{doctorId,jdbcType=VARCHAR},
+      PROFESSOR_ID = #{professorId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_USERID = #{createUserid,jdbcType=VARCHAR},
+      MODIFIED_TIME = #{modifiedTime,jdbcType=TIMESTAMP},
+      MODIFIED_USERID = #{modifiedUserid,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

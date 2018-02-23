@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	
+	<properties resource="generatorConfig.properties"/>
+	
+	<!-- 
+		元素类型为 "context" 的内容必须匹配 (注意顺序)
+		"(property*,plugin*,commentGenerator?,(connectionFactory|jdbcConnection),
+		javaTypeResolver?,javaModelGenerator,sqlMapGenerator?,javaClientGenerator?,table+)"。 
+	-->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 这个插件给由MBG生成的Java模型对象增加了equals和hashCode方法 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+        <!-- 这个插件给由MBG生成的Javas添加了java.io.Serializable标记接口。这个插件给实体类增加了serialVersionUID字段。 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- 该插件给Example类添加方法（实际上是给Criteria内部类）来支持不区分大小写的LIKE搜索 -->
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+        <!-- 该插件给实体类添加toString()方法。 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" /> 
+        
+        <commentGenerator>
+        	<!-- 设置为flase,生成注释包含时间时间戳 -->
+        	<property name="suppressDate" value="true" />
+            <!-- 用来指定MBG生成的代码中是否包含任何注释
+            	设置为false,运行多次插件,不会生成重复的内容
+            	在pom.xml插件配置中,配置不重写文件,所以不需要插件生成的注释 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+	
+		<!-- 元素定义如何连接目标数据库 -->
+		<jdbcConnection driverClass="${driver}"
+                        connectionURL="${url}" userId="${username}" password="${password}">
+        </jdbcConnection>
+
+		<!-- 
+			targetProject:被假定为一个已存在的目录结构。 如果目录结构不存在MBG将会失败.
+			targetPackage:将会转换为 targetProject 适当的子目录结构。 如果有必要，MBG会创建这些子目录。 
+			enableSubPackages:Java模型生成器应该使用子包。 
+							       这意味着在这种情况下生成的模型对象将被放置在名为 test.model.db2admin 的包中（因为表在 DB2ADMIN schema中）。 
+							       如果 enableSubPackages 属性设置为 false， 那么包名将会是 test.model。 
+							  Java模型生成器也应该对字符串进行trim操作。
+							        这意味着任何字符串属性的setter方法将调用trim方法 - 如果您的数据库可能会在字符末尾返回空白符，这是非常有用的。
+		-->
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		<!-- 元素来指定生成 Java 模型对象所属的包 -->
+		<javaModelGenerator targetPackage="entities.business"
+			targetProject="src/main/java">
+			<property name="constructorBased" value="true" />
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- 元素来指定生成 SQL 映射文件所属的包和的目标项目 -->
+		<!-- 如果目标是MyBatis3，那么只有当您选择javaClientGenerator需要XML时，他才是 <context> 元素的一个必须的子元素。 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 元素来指定目标包和目标项目生成的客户端接口和类 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="entities.business.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 配置表映射 -->
+		<table tableName="consult" domainObjectName="Consult">
+			<property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+		</table>
+		<table tableName="finance_fund" domainObjectName="FinanceFund">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="finance_transaction" domainObjectName="FinanceTransaction">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="finance_voucher" domainObjectName="FinanceVoucher">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="finance_voucher_extend" domainObjectName="FinanceVoucherExtend">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="mobile_advertisement" domainObjectName="MobileAdvertisement">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_cart" domainObjectName="OrderCart">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_extend" domainObjectName="OrderExtend">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_goods" domainObjectName="OrderGoods">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_logistics" domainObjectName="OrderLogistics">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_main" domainObjectName="OrderMain">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_sample" domainObjectName="OrderSample">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="order_subject" domainObjectName="OrderSubject">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="project_category" domainObjectName="ProjectCategory">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="project_package" domainObjectName="ProjectPackage">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="project_package_category" domainObjectName="ProjectPackageCategory">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="project_package_product" domainObjectName="ProjectPackageProduct">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="project_product" domainObjectName="ProjectProduct">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="questionnaire" domainObjectName="Questionnaire">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="ready_area" domainObjectName="ReadyArea">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="ready_area_cost" domainObjectName="ReadyAreaCost">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="ready_express" domainObjectName="ReadyExpress">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="sys_company" domainObjectName="SysCompany">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="sys_professor_doctor" domainObjectName="SysProfessorDoctor">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+        <table tableName="sys_user_company" domainObjectName="SysUserCompany">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+	</context>
+</generatorConfiguration>

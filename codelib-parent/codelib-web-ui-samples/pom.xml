@@ -11,5 +11,8 @@
   	<module>codelib-web-ui-sample-autocomplete</module>
   	<module>codelib-web-ui-sample-select2</module>
   	<module>codelib-web-ui-sample-knockout</module>
+  	<module>codelib-web-ui-sample-requestjs</module>
+  	<module>codelib-web-ui-sample-validate</module>
+  	<module>codelib-web-ui-sample-lodash</module>
   </modules>
 </project>

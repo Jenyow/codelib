@@ -12,6 +12,7 @@
 		<module>codelib-webservice-samples</module>
 		<module>codelib-oauth2-samples</module>
 		<module>codelib-springdata-samples</module>
+		<module>codelib-java-samples</module>
 	</modules>
 
 	<properties>

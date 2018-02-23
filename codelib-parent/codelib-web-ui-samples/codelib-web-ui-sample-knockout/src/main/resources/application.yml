@@ -11,4 +11,4 @@ spring:
 
 server:
   port: 8080
-  context-path: /codelib-web-ui-sample-select2
+  context-path: /codelib-web-ui-sample-knockout

@@ -15,5 +15,6 @@
 		<module>codelib-springboot-sample-springmvc-swagger</module>
 		<module>codelib-springboot-sample-mybatis</module>
 		<module>codelib-springboot-sample-webservice</module>
+		<module>codelib-springboot-sample-mybatis-generator</module>
 	</modules>
 </project>

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.SysCompanyMapper">
+  <resultMap id="BaseResultMap" type="entities.business.SysCompany">
+    <constructor>
+      <idArg column="COMPANY_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COMPANY_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SIMPLE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COMPANY_TYPE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="IS_ENABLED" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="COMPANY_LEVEL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CONTACTOR" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MOBILE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COUNTRY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ZONE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PROVINCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CITY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DISTRICT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="STREET" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="FULLADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COMPANY_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="OWNER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="OWNER_CARD_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ESTABLISH_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="PROFILE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="POST_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="FAX" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MEMO" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMPANY_ID, COMPANY_NAME, SIMPLE_NAME, COMPANY_TYPE, IS_ENABLED, COMPANY_LEVEL, CONTACTOR, 
+    MOBILE, USER_NAME, USER_ID, COUNTRY, ZONE, PROVINCE, CITY, DISTRICT, STREET, ADDRESS, 
+    FULLADDRESS, COMPANY_CODE, OWNER, OWNER_CARD_ID, ESTABLISH_DATE, PROFILE, POST_CODE, 
+    FAX, EMAIL, MEMO
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.SysCompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_company
+    where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_company
+    where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.SysCompanyExample">
+    delete from sys_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.SysCompany">
+    insert into sys_company (COMPANY_ID, COMPANY_NAME, SIMPLE_NAME, 
+      COMPANY_TYPE, IS_ENABLED, COMPANY_LEVEL, 
+      CONTACTOR, MOBILE, USER_NAME, 
+      USER_ID, COUNTRY, ZONE, 
+      PROVINCE, CITY, DISTRICT, 
+      STREET, ADDRESS, FULLADDRESS, 
+      COMPANY_CODE, OWNER, OWNER_CARD_ID, 
+      ESTABLISH_DATE, PROFILE, POST_CODE, 
+      FAX, EMAIL, MEMO)
+    values (#{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{simpleName,jdbcType=VARCHAR}, 
+      #{companyType,jdbcType=VARCHAR}, #{isEnabled,jdbcType=BIT}, #{companyLevel,jdbcType=VARCHAR}, 
+      #{contactor,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{fulladdress,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{ownerCardId,jdbcType=VARCHAR}, 
+      #{establishDate,jdbcType=TIMESTAMP}, #{profile,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.SysCompany">
+    insert into sys_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME,
+      </if>
+      <if test="simpleName != null">
+        SIMPLE_NAME,
+      </if>
+      <if test="companyType != null">
+        COMPANY_TYPE,
+      </if>
+      <if test="isEnabled != null">
+        IS_ENABLED,
+      </if>
+      <if test="companyLevel != null">
+        COMPANY_LEVEL,
+      </if>
+      <if test="contactor != null">
+        CONTACTOR,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="country != null">
+        COUNTRY,
+      </if>
+      <if test="zone != null">
+        ZONE,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="district != null">
+        DISTRICT,
+      </if>
+      <if test="street != null">
+        STREET,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="fulladdress != null">
+        FULLADDRESS,
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE,
+      </if>
+      <if test="owner != null">
+        OWNER,
+      </if>
+      <if test="ownerCardId != null">
+        OWNER_CARD_ID,
+      </if>
+      <if test="establishDate != null">
+        ESTABLISH_DATE,
+      </if>
+      <if test="profile != null">
+        PROFILE,
+      </if>
+      <if test="postCode != null">
+        POST_CODE,
+      </if>
+      <if test="fax != null">
+        FAX,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleName != null">
+        #{simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="companyLevel != null">
+        #{companyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="contactor != null">
+        #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null">
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fulladdress != null">
+        #{fulladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerCardId != null">
+        #{ownerCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDate != null">
+        #{establishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.SysCompanyExample" resultType="java.lang.Long">
+    select count(*) from sys_company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_company
+    <set>
+      <if test="record.companyId != null">
+        COMPANY_ID = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null">
+        COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simpleName != null">
+        SIMPLE_NAME = #{record.simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyType != null">
+        COMPANY_TYPE = #{record.companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEnabled != null">
+        IS_ENABLED = #{record.isEnabled,jdbcType=BIT},
+      </if>
+      <if test="record.companyLevel != null">
+        COMPANY_LEVEL = #{record.companyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactor != null">
+        CONTACTOR = #{record.contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null">
+        COUNTRY = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zone != null">
+        ZONE = #{record.zone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null">
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.street != null">
+        STREET = #{record.street,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fulladdress != null">
+        FULLADDRESS = #{record.fulladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null">
+        COMPANY_CODE = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.owner != null">
+        OWNER = #{record.owner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerCardId != null">
+        OWNER_CARD_ID = #{record.ownerCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.establishDate != null">
+        ESTABLISH_DATE = #{record.establishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.profile != null">
+        PROFILE = #{record.profile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postCode != null">
+        POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null">
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_company
+    set COMPANY_ID = #{record.companyId,jdbcType=VARCHAR},
+      COMPANY_NAME = #{record.companyName,jdbcType=VARCHAR},
+      SIMPLE_NAME = #{record.simpleName,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{record.companyType,jdbcType=VARCHAR},
+      IS_ENABLED = #{record.isEnabled,jdbcType=BIT},
+      COMPANY_LEVEL = #{record.companyLevel,jdbcType=VARCHAR},
+      CONTACTOR = #{record.contactor,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      COUNTRY = #{record.country,jdbcType=VARCHAR},
+      ZONE = #{record.zone,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      STREET = #{record.street,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      FULLADDRESS = #{record.fulladdress,jdbcType=VARCHAR},
+      COMPANY_CODE = #{record.companyCode,jdbcType=VARCHAR},
+      OWNER = #{record.owner,jdbcType=VARCHAR},
+      OWNER_CARD_ID = #{record.ownerCardId,jdbcType=VARCHAR},
+      ESTABLISH_DATE = #{record.establishDate,jdbcType=TIMESTAMP},
+      PROFILE = #{record.profile,jdbcType=VARCHAR},
+      POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      MEMO = #{record.memo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.SysCompany">
+    update sys_company
+    <set>
+      <if test="companyName != null">
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleName != null">
+        SIMPLE_NAME = #{simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        COMPANY_TYPE = #{companyType,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        IS_ENABLED = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="companyLevel != null">
+        COMPANY_LEVEL = #{companyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="contactor != null">
+        CONTACTOR = #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null">
+        ZONE = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        STREET = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fulladdress != null">
+        FULLADDRESS = #{fulladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null">
+        OWNER = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerCardId != null">
+        OWNER_CARD_ID = #{ownerCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="establishDate != null">
+        ESTABLISH_DATE = #{establishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="profile != null">
+        PROFILE = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.SysCompany">
+    update sys_company
+    set COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      SIMPLE_NAME = #{simpleName,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{companyType,jdbcType=VARCHAR},
+      IS_ENABLED = #{isEnabled,jdbcType=BIT},
+      COMPANY_LEVEL = #{companyLevel,jdbcType=VARCHAR},
+      CONTACTOR = #{contactor,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      ZONE = #{zone,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      STREET = #{street,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      FULLADDRESS = #{fulladdress,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      OWNER = #{owner,jdbcType=VARCHAR},
+      OWNER_CARD_ID = #{ownerCardId,jdbcType=VARCHAR},
+      ESTABLISH_DATE = #{establishDate,jdbcType=TIMESTAMP},
+      PROFILE = #{profile,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR}
+    where COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

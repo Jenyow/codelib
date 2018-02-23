@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.ReadyExpressMapper">
+  <resultMap id="BaseResultMap" type="entities.business.ReadyExpress">
+    <constructor>
+      <idArg column="EXPRESS_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="EXPRESS_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="HOTLINE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PROFILE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="IS_DEFAULT" javaType="java.lang.Boolean" jdbcType="BIT" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    EXPRESS_ID, EXPRESS_NAME, HOTLINE, PROFILE, IS_DEFAULT
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.ReadyExpressExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ready_express
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ready_express
+    where EXPRESS_ID = #{expressId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ready_express
+    where EXPRESS_ID = #{expressId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.ReadyExpressExample">
+    delete from ready_express
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.ReadyExpress">
+    insert into ready_express (EXPRESS_ID, EXPRESS_NAME, HOTLINE, 
+      PROFILE, IS_DEFAULT)
+    values (#{expressId,jdbcType=VARCHAR}, #{expressName,jdbcType=VARCHAR}, #{hotline,jdbcType=VARCHAR}, 
+      #{profile,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.ReadyExpress">
+    insert into ready_express
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expressId != null">
+        EXPRESS_ID,
+      </if>
+      <if test="expressName != null">
+        EXPRESS_NAME,
+      </if>
+      <if test="hotline != null">
+        HOTLINE,
+      </if>
+      <if test="profile != null">
+        PROFILE,
+      </if>
+      <if test="isDefault != null">
+        IS_DEFAULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expressId != null">
+        #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressName != null">
+        #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="hotline != null">
+        #{hotline,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.ReadyExpressExample" resultType="java.lang.Long">
+    select count(*) from ready_express
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ready_express
+    <set>
+      <if test="record.expressId != null">
+        EXPRESS_ID = #{record.expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressName != null">
+        EXPRESS_NAME = #{record.expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotline != null">
+        HOTLINE = #{record.hotline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profile != null">
+        PROFILE = #{record.profile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDefault != null">
+        IS_DEFAULT = #{record.isDefault,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ready_express
+    set EXPRESS_ID = #{record.expressId,jdbcType=VARCHAR},
+      EXPRESS_NAME = #{record.expressName,jdbcType=VARCHAR},
+      HOTLINE = #{record.hotline,jdbcType=VARCHAR},
+      PROFILE = #{record.profile,jdbcType=VARCHAR},
+      IS_DEFAULT = #{record.isDefault,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.ReadyExpress">
+    update ready_express
+    <set>
+      <if test="expressName != null">
+        EXPRESS_NAME = #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="hotline != null">
+        HOTLINE = #{hotline,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        PROFILE = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        IS_DEFAULT = #{isDefault,jdbcType=BIT},
+      </if>
+    </set>
+    where EXPRESS_ID = #{expressId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.ReadyExpress">
+    update ready_express
+    set EXPRESS_NAME = #{expressName,jdbcType=VARCHAR},
+      HOTLINE = #{hotline,jdbcType=VARCHAR},
+      PROFILE = #{profile,jdbcType=VARCHAR},
+      IS_DEFAULT = #{isDefault,jdbcType=BIT}
+    where EXPRESS_ID = #{expressId,jdbcType=VARCHAR}
+  </update>
+</mapper>

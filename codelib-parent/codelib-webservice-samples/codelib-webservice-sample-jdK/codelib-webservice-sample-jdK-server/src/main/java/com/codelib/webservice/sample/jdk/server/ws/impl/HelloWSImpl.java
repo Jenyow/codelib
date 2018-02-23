@@ -9,18 +9,19 @@ import com.codelib.webservice.sample.jdk.server.ws.HelloWS;
 
 /**
  * SEI接口实现
+ * 
  * @author Jenyow
  *
  */
 @WebService
 public class HelloWSImpl implements HelloWS {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HelloWSImpl.class);
 
-	@Override
-	public String sayHello(String name) {
-		logger.info("WS Server 接受到名字:{}", name);
-		return "Hello " + name;
-	}
+    private static final Logger logger = LoggerFactory.getLogger(HelloWSImpl.class);
+
+    @Override
+    public String sayHello(String name) {
+        logger.info("WS Server 接受到名字:{}", name);
+        return "Hello " + name;
+    }
 
 }

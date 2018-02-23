@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.OrderSubjectMapper">
+  <resultMap id="BaseResultMap" type="entities.business.OrderSubject">
+    <constructor>
+      <idArg column="SUBJECT_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ORDER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="CATEGORY_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="IS_PACKAGE" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="SALE_PRICE" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="PRICE" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SHORT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SUBJECT_ID, ORDER_ID, CATEGORY_ID, IS_PACKAGE, SALE_PRICE, PRICE, NAME, SHORT_NAME
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.OrderSubjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_subject
+    where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_subject
+    where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.OrderSubjectExample">
+    delete from order_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.OrderSubject">
+    insert into order_subject (SUBJECT_ID, ORDER_ID, CATEGORY_ID, 
+      IS_PACKAGE, SALE_PRICE, PRICE, 
+      NAME, SHORT_NAME)
+    values (#{subjectId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{categoryId,jdbcType=VARCHAR}, 
+      #{isPackage,jdbcType=BIT}, #{salePrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, 
+      #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.OrderSubject">
+    insert into order_subject
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        SUBJECT_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID,
+      </if>
+      <if test="isPackage != null">
+        IS_PACKAGE,
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="isPackage != null">
+        #{isPackage,jdbcType=BIT},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.OrderSubjectExample" resultType="java.lang.Long">
+    select count(*) from order_subject
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update order_subject
+    <set>
+      <if test="record.subjectId != null">
+        SUBJECT_ID = #{record.subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null">
+        CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPackage != null">
+        IS_PACKAGE = #{record.isPackage,jdbcType=BIT},
+      </if>
+      <if test="record.salePrice != null">
+        SALE_PRICE = #{record.salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName != null">
+        SHORT_NAME = #{record.shortName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update order_subject
+    set SUBJECT_ID = #{record.subjectId,jdbcType=INTEGER},
+      ORDER_ID = #{record.orderId,jdbcType=INTEGER},
+      CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      IS_PACKAGE = #{record.isPackage,jdbcType=BIT},
+      SALE_PRICE = #{record.salePrice,jdbcType=DECIMAL},
+      PRICE = #{record.price,jdbcType=DECIMAL},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      SHORT_NAME = #{record.shortName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.OrderSubject">
+    update order_subject
+    <set>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="isPackage != null">
+        IS_PACKAGE = #{isPackage,jdbcType=BIT},
+      </if>
+      <if test="salePrice != null">
+        SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.OrderSubject">
+    update order_subject
+    set ORDER_ID = #{orderId,jdbcType=INTEGER},
+      CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      IS_PACKAGE = #{isPackage,jdbcType=BIT},
+      SALE_PRICE = #{salePrice,jdbcType=DECIMAL},
+      PRICE = #{price,jdbcType=DECIMAL},
+      NAME = #{name,jdbcType=VARCHAR},
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR}
+    where SUBJECT_ID = #{subjectId,jdbcType=INTEGER}
+  </update>
+</mapper>

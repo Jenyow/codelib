@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="entities.business.mapper.FinanceVoucherExtendMapper">
+  <resultMap id="BaseResultMap" type="entities.business.FinanceVoucherExtend">
+    <constructor>
+      <idArg column="VOUCHER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="PAYER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="VOUCHER_USER_ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="PAYER" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PAID_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    VOUCHER_ID, PAYER_ID, VOUCHER_USER_ID, PAYER, PAID_DATE
+  </sql>
+  <select id="selectByExample" parameterType="entities.business.FinanceVoucherExtendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from finance_voucher_extend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from finance_voucher_extend
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from finance_voucher_extend
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entities.business.FinanceVoucherExtendExample">
+    delete from finance_voucher_extend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entities.business.FinanceVoucherExtend">
+    insert into finance_voucher_extend (VOUCHER_ID, PAYER_ID, VOUCHER_USER_ID, 
+      PAYER, PAID_DATE)
+    values (#{voucherId,jdbcType=INTEGER}, #{payerId,jdbcType=INTEGER}, #{voucherUserId,jdbcType=INTEGER}, 
+      #{payer,jdbcType=VARCHAR}, #{paidDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="entities.business.FinanceVoucherExtend">
+    insert into finance_voucher_extend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="voucherId != null">
+        VOUCHER_ID,
+      </if>
+      <if test="payerId != null">
+        PAYER_ID,
+      </if>
+      <if test="voucherUserId != null">
+        VOUCHER_USER_ID,
+      </if>
+      <if test="payer != null">
+        PAYER,
+      </if>
+      <if test="paidDate != null">
+        PAID_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="voucherId != null">
+        #{voucherId,jdbcType=INTEGER},
+      </if>
+      <if test="payerId != null">
+        #{payerId,jdbcType=INTEGER},
+      </if>
+      <if test="voucherUserId != null">
+        #{voucherUserId,jdbcType=INTEGER},
+      </if>
+      <if test="payer != null">
+        #{payer,jdbcType=VARCHAR},
+      </if>
+      <if test="paidDate != null">
+        #{paidDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entities.business.FinanceVoucherExtendExample" resultType="java.lang.Long">
+    select count(*) from finance_voucher_extend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update finance_voucher_extend
+    <set>
+      <if test="record.voucherId != null">
+        VOUCHER_ID = #{record.voucherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payerId != null">
+        PAYER_ID = #{record.payerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.voucherUserId != null">
+        VOUCHER_USER_ID = #{record.voucherUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payer != null">
+        PAYER = #{record.payer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paidDate != null">
+        PAID_DATE = #{record.paidDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update finance_voucher_extend
+    set VOUCHER_ID = #{record.voucherId,jdbcType=INTEGER},
+      PAYER_ID = #{record.payerId,jdbcType=INTEGER},
+      VOUCHER_USER_ID = #{record.voucherUserId,jdbcType=INTEGER},
+      PAYER = #{record.payer,jdbcType=VARCHAR},
+      PAID_DATE = #{record.paidDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entities.business.FinanceVoucherExtend">
+    update finance_voucher_extend
+    <set>
+      <if test="payerId != null">
+        PAYER_ID = #{payerId,jdbcType=INTEGER},
+      </if>
+      <if test="voucherUserId != null">
+        VOUCHER_USER_ID = #{voucherUserId,jdbcType=INTEGER},
+      </if>
+      <if test="payer != null">
+        PAYER = #{payer,jdbcType=VARCHAR},
+      </if>
+      <if test="paidDate != null">
+        PAID_DATE = #{paidDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entities.business.FinanceVoucherExtend">
+    update finance_voucher_extend
+    set PAYER_ID = #{payerId,jdbcType=INTEGER},
+      VOUCHER_USER_ID = #{voucherUserId,jdbcType=INTEGER},
+      PAYER = #{payer,jdbcType=VARCHAR},
+      PAID_DATE = #{paidDate,jdbcType=TIMESTAMP}
+    where VOUCHER_ID = #{voucherId,jdbcType=INTEGER}
+  </update>
+</mapper>
