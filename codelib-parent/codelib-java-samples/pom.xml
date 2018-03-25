@@ -10,5 +10,8 @@
   <modules>
   	<module>codelib-java-sample-util</module>
   	<module>codelib-java-sample-poi</module>
+  	<module>codelib-java-sample-jaxb</module>
+  	<module>codelib-java-sample-docx4j</module>
+  	<module>codelib-java-sample-activiti</module>
   </modules>
 </project>

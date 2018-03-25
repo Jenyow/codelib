@@ -40,13 +40,19 @@ public class CourseMapperTest {
 	}
 
 	@Test
-	public void selectCourseStudentsResultMapByPrimaryKey() {
+	public void testSelectCourseStudentsResultMapByPrimaryKey() {
 		Course course = coursemapper.selectCourseStudentsResultMapByPrimaryKey(1);
 		int actual = course.getStudents().size();
 		int expected = 3;
 		assertEquals(expected, actual);
 	}
 	
-	
+	@Test
+	public void testSelectCourseStudentsResultMapTestByPrimaryKey() {
+		Course course = coursemapper.selectCourseStudentsResultMapTestByPrimaryKey(1);
+		int actual = course.getStudents().size();
+		int expected = 3;
+		assertEquals(expected, actual);
+	}
 
 }
