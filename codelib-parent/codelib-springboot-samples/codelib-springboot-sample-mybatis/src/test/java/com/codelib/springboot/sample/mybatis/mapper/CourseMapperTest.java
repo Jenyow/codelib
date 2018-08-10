@@ -1,7 +1,8 @@
 package com.codelib.springboot.sample.mybatis.mapper;
 
-import static org.junit.Assert.*;
-
+import com.codelib.springboot.sample.mybatis.config.DruidDataSourceConfig;
+import com.codelib.springboot.sample.mybatis.config.MyBatisConfig;
+import com.codelib.springboot.sample.mybatis.pojo.Course;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,9 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.codelib.springboot.sample.mybatis.config.DruidDataSourceConfig;
-import com.codelib.springboot.sample.mybatis.config.MyBatisConfig;
-import com.codelib.springboot.sample.mybatis.pojo.Course;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={MyBatisConfig.class, DruidDataSourceConfig.class})
@@ -24,7 +23,7 @@ public class CourseMapperTest {
 	private CourseMapper coursemapper;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 	}
 
 	/**
@@ -42,14 +41,6 @@ public class CourseMapperTest {
 	@Test
 	public void testSelectCourseStudentsResultMapByPrimaryKey() {
 		Course course = coursemapper.selectCourseStudentsResultMapByPrimaryKey(1);
-		int actual = course.getStudents().size();
-		int expected = 3;
-		assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testSelectCourseStudentsResultMapTestByPrimaryKey() {
-		Course course = coursemapper.selectCourseStudentsResultMapTestByPrimaryKey(1);
 		int actual = course.getStudents().size();
 		int expected = 3;
 		assertEquals(expected, actual);

@@ -172,5 +172,9 @@
             <property name="constructorBased" value="true" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
         </table>
+        <table tableName="order_status_history" domainObjectName="OrderStatusHistory">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
 	</context>
 </generatorConfiguration>

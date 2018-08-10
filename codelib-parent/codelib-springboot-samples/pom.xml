@@ -14,7 +14,7 @@
 		<module>codelib-springboot-sample-springmvc-thymeleaf</module>
 		<module>codelib-springboot-sample-springmvc-swagger</module>
 		<module>codelib-springboot-sample-mybatis</module>
-		<module>codelib-springboot-sample-webservice</module>
 		<module>codelib-springboot-sample-mybatis-generator</module>
+		<module>codelib-springboot-sample-activiti</module>
 	</modules>
 </project>
