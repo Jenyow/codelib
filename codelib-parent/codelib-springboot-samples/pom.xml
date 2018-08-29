@@ -17,5 +17,8 @@
 		<module>codelib-springboot-sample-mybatis-generator</module>
 		<module>codelib-springboot-sample-activiti</module>
 		<module>codelib-springboot-sample-druid</module>
-	</modules>
+        <module>codelib-springboot-sample-mapper</module>
+        <module>codelib-springboot-sample-mybatis-plus</module>
+        <module>codelib-springboot-sample-mybatis-plus-generator</module>
+    </modules>
 </project>

@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /mapper
+
+spring:
+  devtools:
+    restart:
+      enabled: false
+  application:
+    # 应用名称
+    name: mapper
+  datasource:
+    druid:
+      name: sso
+      url: jdbc:mysql://localhost:3306/codelib_mapper
+      username: root
+      password: root
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      max-wait: 6000
+      validation-query: select 'x'
+      validation-query-timeout: 15
+      test-on-borrow: false
+      test-while-idle: true
+      keep-alive: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      time-between-log-stats-millis: 300000
+      filter:
+        stat:
+          merge-sql: true
+          log-slow-sql: true
+          slow-sql-millis: 5000
+        commons-log:
+          statement-executable-sql-log-enable: true
+      stat-view-servlet:
+        allow: 127.0.0.1
+        deny:
+        login-username: druid
+        login-password: druid
+        reset-enable: false
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        session-stat-max-count: 1000
+        session-stat-enable: true
+        principal-session-name: user.username
+        profile-enable: true
